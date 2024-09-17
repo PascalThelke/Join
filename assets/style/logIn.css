@@ -10,6 +10,8 @@ body {
     justify-content: space-between;
     padding: 60px 122px 0 77px;
     margin-left: 12px;
+    background-color: transparent;
+    box-shadow: none;
   }
   /*
   .headiconJoin {
@@ -336,7 +338,7 @@ body {
   font-weight: 400;
   /* display: flex;
   justify-content: flex-start; */
-  top: 629px;
+  top: 513px;
 }
 .passwordIconDiv,
 .emailIconDiv {

@@ -30,7 +30,7 @@ async function loadUsers() {
  */
 function btnGuestLog(){
     localStorage.clear();
-    window.location.href = "../summary.html";
+    window.location.href = "/join/summary";
   }
 
 /**
@@ -78,7 +78,7 @@ function logIn(event) {
     if (user) { 
       storeUserData(user);
       console.log('1 User gefunden');                                          
-       window.location.href = "../summary.html";         
+       window.location.href = "./summary";         
        
                                       
        console.log('2 muss weitergeleitet werden');
