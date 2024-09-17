@@ -1,3 +1,4 @@
+import { setItem, getItem } from './storage.js';
 let contactList = [];
 let selectedUsers = [];
 let currentPrio = 'medium';

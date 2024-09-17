@@ -1,3 +1,4 @@
+import { getItem } from './storage.js';
 async function initSummary() {
   await init();
   await getTodosForBoard();

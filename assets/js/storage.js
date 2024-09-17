@@ -1,5 +1,6 @@
-const STORAGE_TOKEN = 'QDZWF0M731P6BJUN86LFPQFS6VZ8PUSF08W8Y1A2';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+import './firebase_init'
+// const STORAGE_TOKEN = 'QDZWF0M731P6BJUN86LFPQFS6VZ8PUSF08W8Y1A2';
+// const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 
 /**
@@ -46,3 +47,4 @@ async function getItem(key) {
 //             throw `Could not find data with key "${key}".`;
 //         });
 // }
+export {getItem, setItem}

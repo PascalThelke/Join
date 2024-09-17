@@ -1,3 +1,5 @@
+import { setItem, getItem } from './storage.js';
+
 let currentUser = [];
 let currentUserName = [];
 let currentUserEmail = [];

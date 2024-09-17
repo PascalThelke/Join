@@ -1,3 +1,4 @@
+import { setItem, getItem } from './storage.js';
 let todoId;
 let clean;
 let todo = [];
