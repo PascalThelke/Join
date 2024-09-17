@@ -1,4 +1,4 @@
-import { setItem, getItem } from './storage.js';
+
 let users = [];
 let newID = 0;
 

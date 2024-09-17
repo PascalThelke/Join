@@ -1,4 +1,3 @@
-import { setItem, getItem } from './assets/js/storage.js';
 let userName;
 let userEmail;
 

@@ -1,5 +1,4 @@
 // If Statements
-import { setItem, getItem } from './storage.js';
 
 function dropdownMenuToggleIF(divID, arrow, dNone) {
     if (dNone) {

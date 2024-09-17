@@ -1,4 +1,4 @@
-import { setItem, getItem } from './storage.js';
+
 /**
  * Changes the priority of the todo being edited and updates the UI accordingly.
  * @param {string} prio - The priority value ('urgent', 'medium', or 'low').

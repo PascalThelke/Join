@@ -1,4 +1,3 @@
-
 /**
  * Retrieves message parameter from the URL query string and displays it in the sign-up screen if present.
  * Hides the sign-up screen if no message parameter is found.

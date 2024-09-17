@@ -1,4 +1,3 @@
-import { setItem, getItem } from './storage.js';
 /**
  * Opens the overlay for adding a new task.
  * If the window width is greater than 1000 pixels, it displays the form in the overlay;
