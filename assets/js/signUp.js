@@ -16,7 +16,7 @@ async function initSignUp() {
 async function addUser() {
   let nameInput = document.getElementById('names').value;
   let emailInput = document.getElementById('emails').value;
-  let passwordInput = document.getElementById('password').value;
+  let passwordInput = document.getElementById('passwordField').value;
 
   let user = users.find(function(u) {                 
         return u.email === emailInput && u.password === passwordInput && u.name === nameInput;
@@ -55,7 +55,7 @@ function checkName() {
  */
 function togglePasswordIcon() {
   let icon = document.getElementById("pWIcon");
-  let passwordInput = document.getElementById("password");
+  let passwordInput = document.getElementById("passwordField");
 
   passwordInput.addEventListener("blur", function () {
     if (passwordInput.value.trim() === "") {
@@ -91,10 +91,10 @@ function togglePasswordIcon() {
  * If either input is empty, it removes the "alert" class from both inputs.
  */
 function checkPasswordValidity() {
-  let passwordInput = document.getElementById("password");
+  let passwordInput = document.getElementById("passwordField");
   let passwordConfirm = document.getElementById("confirmPW");
   if (passwordInput.value !== "" && passwordConfirm.value !== "") {
-    if (passwordInput === passwordConfirm) {
+    if (passwordInput.value === passwordConfirm.value) {
       hidePasswordMismatchMessage();
     } else {
       handlePwMismatch();
@@ -113,7 +113,7 @@ function checkPasswordValidity() {
 function handlePwMismatch() {
   let invalidPW = document.querySelector(".pwInvalid");
   let confirmPasswordInvalid = document.querySelector(".confirmPWInvalid");
-  let passwordInput = document.getElementById("password");
+  let passwordInput = document.getElementById("passwordField");
   let confirmPasswordInput = document.getElementById("confirmPW");
 
     confirmPasswordInvalid.textContent = "Ups! your password don’t match";
@@ -131,7 +131,7 @@ function handlePwMismatch() {
 function hidePasswordMismatchMessage() {
     let passwordMismatchMessage = document.querySelector(".pwInvalid");     // Verweise auf die entsprechenden HTML-Elemente für die Passwort-Missmatch-Meldungen
   let confirmPasswordMismatchMessage = document.querySelector(".confirmPWInvalid");
-  let passwordInput = document.getElementById("password");
+  let passwordInput = document.getElementById("passwordField");
   let confirmPasswordInput = document.getElementById("confirmPW");
   passwordMismatchMessage.classList.add("hidden");             // Fügt den Meldungen die Klasse "hidden" hinzu, um sie auszublenden
   confirmPasswordMismatchMessage.classList.add("hidden");
@@ -144,7 +144,7 @@ function hidePasswordMismatchMessage() {
  * Clears the error message and styling if the password is empty.
  */
 function validPwLength() {
-  let passwordInput = document.getElementById("password");
+  let passwordInput = document.getElementById("passwordField");
   let passwordInvalidDiv = document.querySelector(".pwInvalid");
 
   if (passwordInput.value.length === 0) {
@@ -169,7 +169,7 @@ function validPwLength() {
  */
 function togglePwType() {
   let icon = document.getElementById("pWIcon");
-  let passwordInput = document.getElementById("password");
+  let passwordInput = document.getElementById("passwordField");
 
   if (passwordInput.type === "password") {
     icon.src = "./assets/img/visibility.png";
@@ -233,6 +233,64 @@ function displaySignUpSuccessMessage() {
     screen.classList.add('animationOut'); 
     setTimeout(function() { 
       screen.classList.add('hidden'); 
-    }, 600000); 
-  }, 300000); 
+    }, 6000); 
+  }, 3000); 
+}
+
+/**
+ * Toggles the checkbox image between checked and unchecked states based on its current state. Updates the image source accordingly.
+ */
+function toggleSignUpCheckbox() {
+  let uncheckedCheckbox = document.getElementById("checkbox");
+  let checkedCheckbox = document.getElementById("checked");
+
+  if (uncheckedCheckbox) {
+    uncheckedCheckbox.src = "./assets/img/accept.png";
+    uncheckedCheckbox.id = "checked"; 
+  } else if (checkedCheckbox) {
+    checkedCheckbox.src = "./assets/img/checkbutton.png";
+    checkedCheckbox.id = "checkbox";
+  }
+}
+
+/**
+ * Ensures the sign-up button is enabled/disabled based on validation criteria before adding a user. Utilizes asynchronous validation to control button state and user addition.
+ */
+async function validateSignUpButton() {
+  let signUpButton = document.getElementById("signUpBtn");
+  const isEnabled = isButtonEnabled();
+
+  if (isEnabled) {
+    signUpButton.removeAttribute("disabled");
+    addUser();
+  } else {
+    signUpButton.setAttribute("disabled", "disabled");
+  }
+}
+
+/**
+ * 
+ * @returns Checks if the signup button should be enabled based on form inputs and error messages.
+Returns true if all required fields are filled, no errors are displayed, and the privacy policy is accepted; otherwise, returns false.
+ */
+function isButtonEnabled() {
+  const checkbox = document.getElementById("checked");
+  const nameField = document.getElementById("names");
+  const emailField = document.getElementById("emails");
+  const passwordField = document.getElementById("passwordField");
+  const confirmPasswordInput = document.getElementById("confirmPW");
+  const invalidDivs = document.querySelectorAll(".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid");
+  const hasNoErrors = Array.from(invalidDivs).every(div => div.classList.contains("hidden"));
+  const hasNoWarning = !document.querySelector(".alert");
+  
+  const isEnabled =
+    checkbox.src.includes("accept.png") && 
+    nameField.value.trim() !== "" &&
+    emailField.value.trim() !== "" &&
+    passwordField.value.trim() !== "" &&
+    confirmPasswordInput.value.trim() !== "" &&
+    hasNoErrors &&
+    hasNoWarning;
+
+  return isEnabled;
 }

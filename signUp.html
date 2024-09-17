@@ -28,7 +28,7 @@
         <p class="headline">Sign up</p>
         <img src="./assets/img/blueUnderline.png">
       </div>
-      <form onsubmit="addUser(); return false;">
+      <form onsubmit="validateSignUpButton(); return false;">
         <div class="inputFieldBox">
           <div class="nameMsg">
             <input required class="inputField" type="text" placeholder="Name" id="names"
@@ -46,14 +46,20 @@
           <div class="emailInvalid hidden">
           </div>
           <div class="passwordMsg">
-            <input required class="inputField" 
+            <!-- <input required class="inputField" 
               type="password" 
               placeholder="Password" 
-              id="password" 
+              id="passwordField" 
               autocomplete="on"
               minlength="4" 
-              onchange="validPwLength(), checkPasswordValidity()" 
-              oninput="togglePasswordIcon()">
+              onchange="validPwLength(); checkPasswordValidity()"  oninput="togglePasswordIcon()"> -->
+              <input required class="inputField" 
+              type="password" 
+              placeholder="Password" 
+              id="passwordField" 
+              autocomplete="on"
+              minlength="4" 
+              oninput="validPwLength(); checkPasswordValidity()"  onfocus="togglePasswordIcon()">
             <img class="pwIcon" id="pWIcon" onclick="togglePwType()" src="./assets/img/password_input.svg" alt="">
 
           </div>
@@ -61,25 +67,38 @@
            
           </div>
           <div class="confirmPasswordMsg">
-            <input required class="inputField" 
+            <!-- <input required class="inputField" 
               type="password" 
               placeholder="Confirm Password" 
               id="confirmPW"
               autocomplete="on" 
               minlength="4" 
-              onchange="checkPasswordValidity(), validPwLength()"
-              oninput="togglePasswordIcon()" >
+              onchange=" validPwLength(); checkPasswordValidity()"
+              oninput="togglePasswordIcon()" > -->
+              <input required class="inputField" 
+              type="password" 
+              placeholder="Confirm Password" 
+              id="confirmPW"
+              autocomplete="on" 
+              minlength="4" 
+              oninput= "validPwLength(); checkPasswordValidity()"
+              onfocus="togglePasswordIcon()" >
             <img class="pwIcon" id="pwIconConf" onclick="togglePwTypeConf()" src="./assets/img/password_input.svg" alt="" />
           </div>
           <div class="confirmPWInvalid hidden"></div>
           <div class="form-checkbox">
-            <input type="checkbox" id="checkbox" name="checkbox" required>
-            I accept the
-            <a href="./templates/privacy_policy-logOut.html">Privacy policy</a>
+            <input
+              type="checkbox"
+              required
+              id="checkbox"
+              onclick="toggleSignUpCheckbox()"
+              class="checkbox-input"
+            />
+            <label for="checkbox">I accept the <a href="./templates/privacy_policy-logOut.html">Privacy policy</a></label>
           </div>
           <div>
             <!-- <button type="submit" class="signUpBtn" id="signUpBtn" disabled="disabled">Sign up</button> -->
-            <button type="submit" class="signUpBtn" id="signUpBtn" >Sign up</button>
+            <button type="submit" class="signUpBtn" id="signUpBtn">Sign up</button>
           </div>
 
         </div>

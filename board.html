@@ -219,25 +219,26 @@
                                     <div style="height: 9px;"></div>
                                     <div id="add-task-category-list" class="dropdown-menu">
                                         <div id="task-label-technical" class="add-task-single"
-                                            onclick="selectLabel('Technical Task')">Technical Task</div>
+                                            onclick="selectLabel('Technical Task'); closeFunctionEdit()">Technical Task</div>
                                         <div id="task-label-user" class="add-task-single"
-                                            onclick="selectLabel('User Story')">User Story</div>
-                                        <div id="task-label-html" class="add-task-single" onclick="selectLabel('HTML')">
+                                            onclick="selectLabel('User Story'); closeFunctionEdit()">User Story</div>
+                                        <div id="task-label-html" class="add-task-single" onclick="selectLabel('HTML'); closeFunctionEdit()">
                                             HTML</div>
-                                        <div id="task-label-css" class="add-task-single" onclick="selectLabel('CSS')">
+                                        <div id="task-label-css" class="add-task-single" onclick="selectLabel('CSS'); closeFunctionEdit()">
                                             CSS</div>
-                                        <div id="task-label-js" class="add-task-single" onclick="selectLabel('JS')">
+                                        <div id="task-label-js" class="add-task-single" onclick="selectLabel('JS'); closeFunctionEdit()">
                                             JS</div>
                                         <div id="task-label-tesig" class="add-task-single"
-                                            onclick="selectLabel('Testing')">Testing</div>
+                                            onclick="selectLabel('Testing'); closeFunctionEdit()">Testing</div>
                                     </div>
                                     <div style="height: 7px;"></div>
                                 </div>
                             </div>
                             <div class="column add-task-input-div" onclick="doNotClose(event)">
                                 <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
-                                <input id="add-task-subtasks" class="add-task-input" onclick="openSubtask()" type="text"
-                                    minlength="3" name="Subtasks" placeholder="Add new subtask">
+                                <input id="add-task-subtasks" class="add-task-input" onkeydown="handleEnterKey(event)"
+                                    onclick="openSubtask()" type="text" minlength="3" name="Subtasks"
+                                    placeholder="Add new subtask">
                                 <div id="subbtask-input-icon">
                                     <button type="button" id="add-subtask-button" formnovalidate
                                         onclick="openSubtask()">
@@ -372,18 +373,18 @@
                                     <div style="height: 9px;"></div>
                                     <div id="add-task-category-list-edit" class="dropdown-menu">
                                         <div id="task-label-technical-edit" class="add-task-single"
-                                            onclick="selectLabelEdit('Technical Task')">Technical Task</div>
+                                            onclick="selectLabelEdit('Technical Task'); closeFunction()">Technical Task</div>
                                         <div id="task-label-user-edit" class="add-task-single"
-                                            onclick="selectLabelEdit('User Story')">User Story</div>
+                                            onclick="selectLabelEdit('User Story'); closeFunction()">User Story</div>
                                         <div id="task-label-html-edit" class="add-task-single"
-                                            onclick="selectLabelEdit('HTML')">HTML</div>
+                                            onclick="selectLabelEdit('HTML'); closeFunction()">HTML</div>
                                         <div id="task-label-css-edit" class="add-task-single"
-                                            onclick="selectLabelEdit('CSS')">CSS</div>
+                                            onclick="selectLabelEdit('CSS'); closeFunction()">CSS</div>
                                         <div id="task-label-js-edit" class="add-task-single"
-                                            onclick="selectLabelEdit('JS')">
+                                            onclick="selectLabelEdit('JS'); closeFunction()">
                                             JS</div>
                                         <div id="task-label-tesig-edit" class="add-task-single"
-                                            onclick="selectLabelEdit('Testing')">Testing</div>
+                                            onclick="selectLabelEdit('Testing'); closeFunction()">Testing</div>
                                     </div>
                                     <div style="height: 7px;"></div>
                                 </div>
@@ -391,8 +392,8 @@
                             <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
                                 <label class="form-input-titel-edit" for="add-task-subtasks-edit">Subtasks</label>
                                 <input id="add-task-subtasks-edit" class="add-task-input-edit"
-                                    onclick="openSubtaskEdit()" type="text" minlength="3" name="Subtasks"
-                                    placeholder="Add new subtask">
+                                    onkeydown="handleEnterKey(event)" onclick="openSubtaskEdit()" type="text"
+                                    minlength="3" name="Subtasks" placeholder="Add new subtask">
                                 <div id="subbtask-input-icon-edit">
                                     <button type="button" id="add-subtask-button-edit" class="subtask-button-edit"
                                         formnovalidate onclick="openSubtaskEdit()">
@@ -437,7 +438,7 @@
     </div>
     </div>
     <script src="./assets/js/add_task.js"></script>
-
+    <script src="./assets/js/add_task_second_script.js"></script>
 </body>
 
 </html>

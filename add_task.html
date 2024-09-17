@@ -106,24 +106,24 @@
                                         <div style="height: 9px;"></div>
                                         <div id="add-task-category-list" class="dropdown-menu">
                                             <div id="task-label-technical" class="add-task-single"
-                                                onclick="selectLabel('Technical Task')">Technical Task</div>
+                                                onclick="selectLabel('Technical Task'); closeFunction()">Technical Task</div>
                                             <div id="task-label-user" class="add-task-single"
-                                                onclick="selectLabel('User Story')">User Story</div>
+                                                onclick="selectLabel('User Story'); closeFunction()">User Story</div>
                                             <div id="task-label-html" class="add-task-single"
-                                                onclick="selectLabel('HTML')">HTML</div>
+                                                onclick="selectLabel('HTML'); closeFunction()">HTML</div>
                                             <div id="task-label-css" class="add-task-single"
-                                                onclick="selectLabel('CSS')">CSS</div>
+                                                onclick="selectLabel('CSS'); closeFunction()">CSS</div>
                                             <div id="task-label-js" class="add-task-single" onclick="selectLabel('JS')">
                                                 JS</div>
                                             <div id="task-label-tesig" class="add-task-single"
-                                                onclick="selectLabel('Testing')">Testing</div>
+                                                onclick="selectLabel('Testing'); closeFunction()">Testing</div>
                                         </div>
                                         <div style="height: 7px;"></div>
                                     </div>
                                 </div>
                                 <div class="column add-task-input-div" onclick="doNotClose(event)">
                                     <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
-                                    <input id="add-task-subtasks" class="add-task-input" onkeydown="handleKeyPress(event)" onclick="openSubtask()"
+                                    <input id="add-task-subtasks" class="add-task-input" onkeydown="handleEnterKey(event)" onclick="openSubtask()"
                                         type="text" minlength="3" name="Subtasks" placeholder="Add new subtask">
                                     <div id="subbtask-input-icon">
                                         <button type="button" id="add-subtask-button" formnovalidate
@@ -173,6 +173,7 @@
         <img src="./assets/img/addTaskAdded.svg" alt="">
     </div>
     <script src="./assets/js/add_task.js"></script>
+    <script src="./assets/js/add_task_second_script.js"></script>
 </body>
 
 </html>

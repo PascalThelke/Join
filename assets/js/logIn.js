@@ -76,15 +76,10 @@ function logIn(event) {
         return u.email === emailInput.value && u.password === passwordInput.value;
       });
     if (user) { 
-      storeUserData(user);
-      console.log('1 User gefunden');                                          
-       window.location.href = "./summary";         
-       
-                                      
-       console.log('2 muss weitergeleitet werden');
+      storeUserData(user);                                        
+       window.location.href = "../summary.html"; 
       } else {                                              
-        showUserPasswordMismatch();                                   
-        console.log('3 else');
+        showUserPasswordMismatch(); 
       }
   }
 
@@ -225,24 +220,10 @@ function checkPasswordValidity() {
     }
   });
 
-  
 
-  // function toggleLoginCheckbox() {
-  //   let uncheckedCheckbox = document.getElementById("unchecked");
-  //   let checkedCheckbox = document.getElementById("checked");
-  
-  //   if (uncheckedCheckbox) {
-  //     uncheckedCheckbox.src = "./assets/img/check.png";
-  //     uncheckedCheckbox.id = "checked";
-  //     rememberInputData();
-  //   } else if (checkedCheckbox) {
-  //     checkedCheckbox.src = "./assets/img/checkbox.png";
-  //     checkedCheckbox.id = "unchecked";
-  //     clearStoredInput();
-  //     clearInputFields();
-  //   }
-  // }
-
+ /**
+ * Toggles the appearance of the login checkbox image between "accept.png" and "checkbutton.png", and performs corresponding actions based on its state.
+ */ 
   function toggleLoginCheckbox() {
     let uncheckedCheckbox = document.getElementById("unchecked");
     let checkedCheckbox = document.getElementById("checked");
@@ -259,6 +240,9 @@ function checkPasswordValidity() {
     }
 }
   
+/**
+ * Stores the user's email and password input values in the browser's local storage.
+ */
   function rememberInputData() {
     let userEmail = document.getElementById("email").value;
     let userPassword = document.getElementById("passwordInput").value;
@@ -267,11 +251,9 @@ function checkPasswordValidity() {
     localStorage.setItem("password", userPassword);
   }
   
-  // function clearStoredInput() {
-  //   localStorage.removeItem("storedEmail");
-  //   localStorage.removeItem("storedPassword");
-  // }
-  
+  /**
+ * Clears the input fields for email and password.
+ */
   function clearInputFields() {
     document.getElementById("email").value = "";
     document.getElementById("passwordInput").value = "";

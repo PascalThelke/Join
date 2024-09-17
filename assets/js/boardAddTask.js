@@ -103,3 +103,10 @@ function checkBoxSwitchImg(i, ID) {
         updateBoard();
     }
 }
+
+
+function closeFunctionEdit() {
+    closeDropdownMenu('add-task-contact-div-edit', 'assignet-arrow');
+    closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow')
+    closeSubtask();
+}
