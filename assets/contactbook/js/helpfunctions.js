@@ -15,7 +15,7 @@ function noClose(event) {
  * @returns {Object} An object containing profile initials and the second name's initial.
  */
 function getInitials(contact) {
-    const words = contact.name.split(" ");
+    const words = contact.contact.name.split(" ");
     const firstName = words[0][0];
     const secondName = words[1] ? words[1][0] : '';
     const profileinitials = firstName + secondName;
@@ -73,9 +73,9 @@ async function removeInvalidEntries(array) {
  * @param {Object} contact - The contact object for which to find the alphabet index and contact index.
  */
 function findAlphabetIndex(contact) {
-    const firstLetter = contact.name.charAt(0).toUpperCase();
+    const firstLetter = contact.contact.name.charAt(0).toUpperCase();
     const alphabetIndex = alphabet.indexOf(firstLetter);
-    contactsStartingWithLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === firstLetter);
+    contactsStartingWithLetter = contactList.filter(contact => contact.contact.name.charAt(0).toUpperCase() === firstLetter);
     const contactIndex = contactsStartingWithLetter.indexOf(contact);
     renderContact(alphabetIndex, contactIndex);
 }
@@ -93,7 +93,7 @@ function findAlphabetIndex(contact) {
 async function deleteContactWithoutConfirm() {
     const contactName = document.getElementById('contact_overview_name').innerText.trim();
     const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
-    const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
+    const indexToDelete = contactList.findIndex(contact => contact.contact.name === contactName && contact.mail === contactMail);
     if (indexToDelete !== -1) {
         contactList.splice(indexToDelete, 1);
         console.log('Contact deleted successfully.');

@@ -69,7 +69,7 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
             </div>
             <div class="column gap8">
                 <div id="contact_list_name${alphabetIndex}">
-                    ${contact.name}
+                    ${contact.contact.name}
                 </div>
                 <a id="contact_list_mail${alphabetIndex}">
                     ${contact.mail}
@@ -87,7 +87,7 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
  * @param {number} contactIndex - Index of the selected contact.
  */
 function renderContact(alphabetIndex, contactIndex) {
-    const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
+    const contact = contactList.filter(contact => contact.contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     const { profileinitials, secondName } = getInitials(contact);
     let contactoverview = document.getElementById('contact_overview');
     contactoverview.style.display = "flex";
@@ -102,7 +102,7 @@ function renderContact(alphabetIndex, contactIndex) {
                     </div>
                     <div class="contact_overview_name_container column">
                         <div id="contact_overview_name">
-                            ${contact.name}
+                            ${contact.contact.name}
                         </div>
                         <div class="flex marginL-24">
                             <div id="contactlist_edit_icon_container" onclick="openEditContact(${alphabetIndex}, ${contactIndex})">

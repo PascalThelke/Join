@@ -52,19 +52,17 @@ async function loadContactList() {
     console.log("response", contactListResponse);
     let contactKeysArray = Object.keys(contactListResponse);
     console.log("key response", contactKeysArray);
-    contactKeysArray.forEach(contact => {
+
+    contactKeysArray.forEach((contact) => {
         contactList.push(
             {
-                id: contactKeysArray[contact],
-                contact: contactList[contactKeysArray[contact]],
-                // "name": name.value,
-                // "mail": mail.value,
-                // "phone": phone.value
+                id: contact,
+                contact: contactListResponse[contact],
             }
         )
     });
 
-    console.log('as array',contactList);
+    console.log("as array", contactList);
   } catch (e) {
     // If an error occurs during parsing or retrieval, log the error to the console
     console.error("Loading error:", e);
@@ -84,8 +82,9 @@ async function loadContactList() {
 function renderContactsToList() {
   for (let i = 0; i < alphabet.length; i++) {
     const letter = alphabet[i];
+    console.log('contactlist before filtering:',contactList)
     const contactsStartingWithLetter = contactList.filter(
-      (contact) => contact.name.charAt(0).toUpperCase() === letter
+      (contact) => contact.contact.name.charAt(0).toUpperCase() === letter
     );
     const namesContainer = document.getElementById(`contact_list_names${i}`);
     const alphabetContainer = document.getElementById(
@@ -119,7 +118,7 @@ function renderContactsToList() {
 function openEditContact(alphabetIndex, contactIndex) {
   const contact = contactList.filter(
     (contact) =>
-      contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex]
+      contact.contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex]
   )[contactIndex];
   showAddContactDialog();
   changeAddContactoverlay(contact);
@@ -155,9 +154,9 @@ async function addToContacts() {
   let mail = document.getElementById("contactlist_mail_input");
   let phone = document.getElementById("contactlist_phone_input");
   let contact = {
-      "name": name.value,
-      "mail": mail.value,
-      "phone": phone.value
+    name: name.value,
+    mail: mail.value,
+    phone: phone.value,
   };
   let contactKeysArray = Object.keys(contactListResponse);
 
@@ -206,7 +205,7 @@ async function deleteContact() {
     .getElementById("contact_overview_mail")
     .innerText.trim();
   const indexToDelete = contactList.findIndex(
-    (contact) => contact.name === contactName && contact.mail === contactMail
+    (contact) => contact.contact.name === contactName && contact.mail === contactMail
   );
   if (indexToDelete !== -1) {
     const confirmDelete = confirm(
@@ -238,7 +237,7 @@ async function openEditContactLowRes() {
     .getElementById("contact_overview_mail")
     .innerText.trim();
   const contact = contactList.find(
-    (contact) => contact.name === contactName && contact.mail === contactMail
+    (contact) => contact.contact.name === contactName && contact.mail === contactMail
   );
   if (!contact) {
     console.error("Contact not found.");
