@@ -39,7 +39,7 @@ async function getItem(path=""){
     return responseToJson = await response.json();
 }
 
-async function setItem(path="", data={}){
+async function postItem(path="", data={}){
     let response = await fetch(STORAGE_URL + path + ".json",{
         method: "POST",
         header: {
@@ -57,7 +57,7 @@ async function deleteItem(path="", data={}){
     return responseToJson = await response.json();
 }
 
-async function putItem(path = "", data = {}) {
+async function setItem(path = "", data = {}) {
     let response = await fetch(STORAGE_URL + path + ".json", {
         method: "PUT",
         headers: {

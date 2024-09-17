@@ -191,7 +191,7 @@ function renderContactOverlay() {
                                 </div>
                                 <div class="input_container">
                                     <input required type="text" placeholder="Phone" id="contactlist_phone_input"
-                                        pattern="\\+[0-9]{2} [0-9]{3} [0-9]{3} [0-9]{3} [0-9]{2}"
+                    
                                         title="Please enter a valid phone number in the format +49 333 333 333 33">
                                     <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
                                 </div>
