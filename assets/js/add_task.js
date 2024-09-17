@@ -24,7 +24,7 @@ async function initAddTask() {
  */
 async function loadContactList() {
     try {
-        contactList = JSON.parse(await getItem('contactList'));
+        contactList = await getItem('contactList');
         renderContactListForTask();
     } catch (e) {
         console.error('Loading error:', e);
@@ -359,7 +359,7 @@ async function startCreateTask() {
  */
 async function createTask(category) {
     typeLabel();
-    tasks = JSON.parse(await getItem('tasks'));
+    tasks = await getItem('tasks');
     let task = {
         "id": tasks.length,
         "title": document.getElementById('add-task-title').value,

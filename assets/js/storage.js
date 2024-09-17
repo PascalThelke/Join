@@ -32,17 +32,15 @@
 //         });
 // }
 
-
-const STORAGE_TOKEN = 'joinstorage';
 const STORAGE_URL = 'https://join-79db1-default-rtdb.europe-west1.firebasedatabase.app/';
 
 async function getItem(path=""){
-    return response = await fetch(STORAGE_URL + path + ".json");
+    let response = await fetch(STORAGE_URL + path + ".json");
     return responseToJson = await response.json();
 }
 
 async function setItem(path="", data={}){
-    return response = await fetch(STORAGE_URL + path + ".json",{
+    let response = await fetch(STORAGE_URL + path + ".json",{
         method: "POST",
         header: {
             "Content-Type": "application/json",
@@ -52,9 +50,20 @@ async function setItem(path="", data={}){
     return responseToJson = await response.json();
 }
 
-async function deleteItem(path=""){
-    return response = await fetch(STORAGE_URL + path + ".json",{
+async function deleteItem(path="", data={}){
+    let response = await fetch(STORAGE_URL + path + ".json",{
         method: "DELETE",
+    });
+    return responseToJson = await response.json();
+}
+
+async function putItem(path = "", data = {}) {
+    let response = await fetch(STORAGE_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
     });
     return responseToJson = await response.json();
 }

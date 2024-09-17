@@ -190,18 +190,19 @@ function focusSubtaskHTML(i) {
  * @returns {Promise<void>}
  */
 async function deleteAllTasksEmergencyFunction() {
-    tasks = JSON.parse(await getItem('tasks'));
+    tasks = await getItem('tasks');
     console.log(tasks);
     tasks = [];
     await setItem('tasks', JSON.stringify(tasks));
-    let test = JSON.parse(await getItem('tasks'));
+    let test = await getItem('tasks');
     console.log(test);
 }
 
 
 async function addExampleTasks() {
-    tasks = JSON.parse(await getItem('tasks'));
-    console.log(tasks);
+    let taskResponse = await getItem('tasks');
+    // tasks = await getItem('tasks');
+    // console.log(tasks);
     tasks = [
         {
             "id": 0,
@@ -445,7 +446,17 @@ async function addExampleTasks() {
             ]
         }
     ];    
+    let TaskKeysArray = Object.keys(taskResponse);
+
+    TaskKeysArray.forEach(task => {
+        tasks.push(
+            {
+                id: TaskKeysArray[index],
+                task: taskResponse[TaskKeysArray[index]],
+            }
+        )
+    });
     await setItem('tasks', JSON.stringify(tasks));
-    let test = JSON.parse(await getItem('tasks'));
+    let test = await getItem('tasks');
     console.log(test);
 }

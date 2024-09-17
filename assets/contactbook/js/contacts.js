@@ -23,7 +23,7 @@ async function initContactList() {
 async function loadContactList() {
     try {
         // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
-        contactList = JSON.parse(await getItem('contactList'));
+        contactListResponse = await getItem('contactList');
     } catch (e) {
         // If an error occurs during parsing or retrieval, log the error to the console
         console.error('Loading error:', e);
@@ -106,12 +106,26 @@ async function addToContacts() {
     let name = document.getElementById('contactlist_name_input');
     let mail = document.getElementById('contactlist_mail_input');
     let phone = document.getElementById('contactlist_phone_input');
-    let contact = {
-        "name": name.value,
-        "mail": mail.value,
-        "phone": phone.value
-    };
-    contactList.push(contact);
+    // let contact = {
+    //     "name": name.value,
+    //     "mail": mail.value,
+    //     "phone": phone.value
+    // };
+    let contactKeysArray = Object.keys(contactListResponse);
+    console.log(contactKeysArray);
+
+    contactKeysArray.forEach(contact => {
+        contactList.push(
+            {
+                id: contactKeysArray[contact],
+                contact: contactList[contactKeysArray[contact]],
+                "name": name.value,
+                "mail": mail.value,
+                "phone": phone.value
+            }
+        )
+    });
+    // contactList.push(contact);
     await setItem('contactList', JSON.stringify(contactList));
     resetAddContactForm(name, mail, phone);
     closeAddContactDialog();

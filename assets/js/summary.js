@@ -12,7 +12,7 @@ let todo = [];
  * @returns {Promise} - A Promise that resolves with the retrieved todos.
  */
 async function getTodosForBoard() {
-    todo = JSON.parse(await getItem('tasks'));
+    todo = await getItem('tasks');
 }
 
 /**
@@ -20,7 +20,7 @@ async function getTodosForBoard() {
  * @returns {Promise} - A Promise that resolves with the retrieved user's information.
  */
 async function getCurrentUser() {
-  let userName = JSON.parse(localStorage.getItem("currentUserName"));
+  let userName = localStorage.getItem("currentUserName");
   let summaryUserName = document.getElementById('summary-userName');
   
   if (userName) {

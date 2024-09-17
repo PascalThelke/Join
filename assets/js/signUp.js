@@ -6,7 +6,7 @@ let newID = 0;
  * Initialisiert das Sign-Up-Modul, indem die Benutzerdaten aus dem lokalen Speicher geladen werden.
  */
 async function initSignUp() {
-  users = JSON.parse(await getItem("users")) || [];  
+  users = await getItem("users") || [];  
 }
 
 /**

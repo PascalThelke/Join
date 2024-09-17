@@ -23,7 +23,7 @@ async function boardInit() {
  * @returns {Promise<void>} A Promise that resolves when the todos are retrieved and logged.
  */
 async function getTodosForBoard() {
-    todo = JSON.parse(await getItem('tasks'));
+    todo = await getItem('tasks');
 }
 
 /**

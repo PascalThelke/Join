@@ -263,7 +263,7 @@ function clearTaskEdit() {
  */
 async function loadContactListEdit(i) {
     try {
-        contactList = JSON.parse(await getItem('contactList'));
+        contactList = await getItem('contactList');
         renderContactListForTaskEdit(i);
         updateSelectedUsersEdit();
     } catch (e) {

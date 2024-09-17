@@ -10,7 +10,7 @@ let  contactlist = [];
  */
 async function init() {                             
     let userData = await getItem("users");      
-    users = JSON.parse(userData) || [];
+    users = userData || [];
     checkLoginStatus()
 }
 
@@ -20,7 +20,7 @@ async function init() {
  */
 async function loadUsers() {
     try {                                               
-       users = JSON.parse(await getItem('users'));
+       users = await getItem('users');
     } catch (e) {
        console.error('Loading error:', e);   
     }
@@ -57,7 +57,7 @@ function autoFillLoginForm() {
   let passwordInputField = document.getElementById('password'); 
 
   if (currentUserData) {
-      let currentUser = JSON.parse(currentUserData); 
+      let currentUser = currentUserData; 
       emailInputField.value = currentUser.email; 
       passwordInputField.value = currentUser.password; 
       logIn(); 
