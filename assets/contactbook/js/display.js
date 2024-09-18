@@ -175,9 +175,9 @@ function changeAddContactoverlay(contact) {
     document.getElementById('contact_save_button').style.display = 'none';
     document.getElementById('contact_cancel_button').innerHTML = 'Delete';
     document.getElementById('add_contact_headline').innerHTML = 'Edit contact';
-    document.getElementById('contactlist_name_input').value = contact.name;
-    document.getElementById('contactlist_mail_input').value = contact.mail;
-    document.getElementById('contactlist_phone_input').value = contact.phone;
+    document.getElementById('contactlist_name_input').value = contact.contact.name;
+    document.getElementById('contactlist_mail_input').value = contact.contact.mail;
+    document.getElementById('contactlist_phone_input').value = contact.contact.phone;
 }
 
 

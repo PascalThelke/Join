@@ -1,14 +1,14 @@
 /**
  *  This function is used to render an empty contactlist with alphabethical rows.
- * 
+ *
  * @param {string} singleLetter - This is the letter for each row in the contactlist.
  */
 function renderContactList() {
-    document.getElementById('contact_list').innerHTML = ``;
-    renderContactlistTop();
-    for (let i = 0; i < alphabet.length; i++) {
-        const singleLetter = alphabet[i];
-        document.getElementById('contact_list').innerHTML += `
+  document.getElementById("contact_list").innerHTML = ``;
+  renderContactlistTop();
+  for (let i = 0; i < alphabet.length; i++) {
+    const singleLetter = alphabet[i];
+    document.getElementById("contact_list").innerHTML += `
         <div id="contactlist_alphabet_sorting_container${i}"> 
             ${singleLetter}  
         </div>
@@ -18,16 +18,16 @@ function renderContactList() {
             <div id="contact_list_names${i}">
         </div>
     `;
-    }
-    renderContactsToList();
-    renderInitialsOfUser();
+  }
+  renderContactsToList();
+  renderInitialsOfUser();
 }
 
 /**
  * Renders the top section of the contact list with options for adding a new contact.
  */
 function renderContactlistTop() {
-    document.getElementById('contact_list').innerHTML = `
+  document.getElementById("contact_list").innerHTML = `
     <div class="contactlist_button_container">
         <button onclick="showAddContactDialog()">
             Add new contact <img src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
@@ -51,106 +51,161 @@ function renderContactlistTop() {
 
 /**
  * This function renders contacts into their corresponding alphabetical container within the contact list.
- * 
+ *
  * @param {HTMLElement} namesContainer - Container for displaying contact names.
  * @param {HTMLElement} alphabetContainer - Container for displaying the corresponding letter.
  * @param {Array} contactsStartingWithLetter - Array of contacts starting with the same letter.
  * @param {number} alphabetIndex - Index of the current alphabet letter.
  */
-function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, alphabetIndex) {
-    namesContainer.innerHTML = '';
-    alphabetContainer.style.display = 'flex';
-    contactsStartingWithLetter.forEach((contact, contactIndex) => {
-        let { profileinitials, secondName } = getInitials(contact);
-        namesContainer.innerHTML += `
+function renderIntoAlphabetContainer(
+  namesContainer,
+  alphabetContainer,
+  contactsStartingWithLetter,
+  alphabetIndex
+) {
+  namesContainer.innerHTML = "";
+  alphabetContainer.style.display = "flex";
+  contactsStartingWithLetter.forEach((contact, contactIndex) => {
+    let { profileinitials, secondName } = getInitials(contact);
+    let contactName = "";
+    let contactMail = "";
+    if (contact.contact && contact.contact.name && contact.contact.mail) {
+      contactName = contact.contact.name;
+      contactMail = contact.contact.mail;
+    } else if (contact.name && contact.mail) {
+      contactName = contact.name;
+      contactMail = contact.mail;
+    }
+    namesContainer.innerHTML += `
         <div class="contact_list_container" id="contact_${alphabetIndex}_${contactIndex}" onclick="renderContact(${alphabetIndex},${contactIndex})">
             <div id="contact_list_initals${alphabetIndex}" class="letter-${secondName.toLowerCase()}">
                 ${profileinitials}
             </div>
             <div class="column gap8">
                 <div id="contact_list_name${alphabetIndex}">
-                    ${contact.contact.name}
+                    ${contactName}
                 </div>
                 <a id="contact_list_mail${alphabetIndex}">
-                    ${contact.mail}
+                    ${contactMail}
                 </a>
             </div>
         </div>
         `;
-    });
+  });
 }
 
 /**
  * This function renders detailed information about a contact when selected from the contact list.
- * 
+ *
  * @param {number} alphabetIndex - Index of the corresponding alphabetical row.
  * @param {number} contactIndex - Index of the selected contact.
  */
 function renderContact(alphabetIndex, contactIndex) {
-    const contact = contactList.filter(contact => contact.contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
-    const { profileinitials, secondName } = getInitials(contact);
-    let contactoverview = document.getElementById('contact_overview');
-    contactoverview.style.display = "flex";
-    contactoverview.style.transform = 'translateX(200%)';
-    setTimeout(() => {
-        contactoverview.innerHTML = ` 
-            <div class="contact_information_container">
-                <img onclick="closeContact()" src="./assets/img/arrow-left-line.png" alt="">
-                <div id="contact_overview_top">
-                    <div class="contact_list_overview_initals letter-${secondName.toLowerCase()}">
-                        ${profileinitials}
-                    </div>
-                    <div class="contact_overview_name_container column">
-                        <div id="contact_overview_name">
-                            ${contact.contact.name}
-                        </div>
-                        <div class="flex marginL-24">
-                            <div id="contactlist_edit_icon_container" onclick="openEditContact(${alphabetIndex}, ${contactIndex})">
-                                <span>Edit</span>
-                            </div>
-                            <div id="contactlist_delete_icon_container" onclick="deleteContact()">
-                                <span>Delete</span>
-                            </div>
-                        </div>
-                    </div>
+  // Überprüfen, ob 'contact.contact.name' oder 'contact.name' verwendet werden soll
+  const contact = contactList.filter((contact) => {
+    if (contact.contact && contact.contact.name) {
+      return (
+        contact.contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex]
+      );
+    } else if (contact.name) {
+      return contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex];
+    }
+    return false;
+  })[contactIndex];
+
+  // Initialen abrufen
+  const { profileinitials, secondName } = getInitials(contact);
+
+  let contactoverview = document.getElementById("contact_overview");
+  contactoverview.style.display = "flex";
+  contactoverview.style.transform = "translateX(200%)";
+
+  setTimeout(() => {
+    // Überprüfen, ob 'contact.contact' oder 'contact' direkt verwendet wird
+    let contactName = "";
+    let contactMail = "";
+    let contactPhone = "";
+
+    if (
+      contact.contact &&
+      contact.contact.name &&
+      contact.contact.mail &&
+      contact.contact.phone
+    ) {
+      contactName = contact.contact.name;
+      contactMail = contact.contact.mail;
+      contactPhone = contact.contact.phone;
+    } else if (contact.name && contact.mail && contact.phone) {
+      contactName = contact.name;
+      contactMail = contact.mail;
+      contactPhone = contact.phone;
+    }
+
+    // HTML-Template mit den richtigen Werten befüllen
+    contactoverview.innerHTML = ` 
+        <div class="contact_information_container">
+            <img onclick="closeContact()" src="./assets/img/arrow-left-line.png" alt="">
+            <div id="contact_overview_top">
+                <div class="contact_list_overview_initals letter-${secondName.toLowerCase()}">
+                    ${profileinitials}
                 </div>
-                <div id="contact_information">
-                </div>
-                <div class="contact_overview_footer">
-                    <div class="contact_overview_footer_container">
-                        <b>Email</b>
-                        <a href="mailto:${contact.mail}" id="contact_overview_mail">
-                            ${contact.mail}
-                        </a>
+                <div class="contact_overview_name_container column">
+                    <div id="contact_overview_name">
+                        ${contactName}
                     </div>
-                    <div class="contact_overview_footer_container">
-                        <b>Phone</b>
-                        <a href="tel:${contact.phone}" id="contact_overview_phone">${contact.phone}</a>
+                    <div class="flex marginL-24">
+                        <div id="contactlist_edit_icon_container" onclick="openEditContact(${alphabetIndex}, ${contactIndex})">
+                            <span>Edit</span>
+                        </div>
+                        <div id="contactlist_delete_icon_container" onclick="deleteContact()">
+                            <span>Delete</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        `;
-        addHighlightsToContact(alphabetIndex, contactIndex);
-        contactoverview.style.transform = 'translateX(0%)';
-    }, 125);
-    const addContactOptionsButton = document.getElementById('contactlist_add_contact_options_button');
-    if (window.innerWidth < 1210) {
-        addContactOptionsButton.style.display = 'flex';
-    } else {
-        addContactOptionsButton.style.display = 'none';
-    }
-    document.getElementById('contactlist_add_contact_button').style.display = 'none';
+            <div id="contact_information">
+            </div>
+            <div class="contact_overview_footer">
+                <div class="contact_overview_footer_container">
+                    <b>Email</b>
+                    <a href="mailto:${contactMail}" id="contact_overview_mail">
+                        ${contactMail}
+                    </a>
+                </div>
+                <div class="contact_overview_footer_container">
+                    <b>Phone</b>
+                    <a href="tel:${contactPhone}" id="contact_overview_phone">
+                        ${contactPhone}
+                    </a>
+                </div>
+            </div>
+        </div>
+      `;
+    addHighlightsToContact(alphabetIndex, contactIndex);
+    contactoverview.style.transform = "translateX(0%)";
+  }, 125);
+
+  const addContactOptionsButton = document.getElementById(
+    "contactlist_add_contact_options_button"
+  );
+  if (window.innerWidth < 1210) {
+    addContactOptionsButton.style.display = "flex";
+  } else {
+    addContactOptionsButton.style.display = "none";
+  }
+  document.getElementById("contactlist_add_contact_button").style.display =
+    "none";
 }
 
 /**
  * Renders the contact overlay for adding or editing contacts.
- * 
+ *
  * This function dynamically generates the HTML content for the contact overlay and inserts it into the 'contactlist_overlay_container' element.
  * It includes input fields for entering contact information (name, email, phone), buttons for canceling, saving, and editing contacts, and icons for visual representation.
  * The overlay also includes event listeners for handling user interactions such as closing the overlay, submitting the form, and updating the initials display.
  */
 function renderContactOverlay() {
-    document.getElementById('contactlist_overlay_container').innerHTML = `
+  document.getElementById("contactlist_overlay_container").innerHTML = `
     <div class="contactlist_mid_layer">
             <div onclick="noClose(event)" id="add_contact_overlay">
                 <div class="left_side_add_contact_overlay">
@@ -216,14 +271,13 @@ function renderContactOverlay() {
     `;
 }
 
-
 /**
  * Renders the initials of the current user in the contact list.
  */
 function renderInitialsOfUser() {
-    let { profileinitials, secondName } = getInitialsforUser(String(userName));
-    document.getElementById('contact_list_initals').innerHTML = profileinitials;
-    document.getElementById('contact_list_initals').classList.add(`letter-${secondName.toLowerCase()}`);
+  let { profileinitials, secondName } = getInitialsforUser(String(userName));
+  document.getElementById("contact_list_initals").innerHTML = profileinitials;
+  document
+    .getElementById("contact_list_initals")
+    .classList.add(`letter-${secondName.toLowerCase()}`);
 }
-
-
