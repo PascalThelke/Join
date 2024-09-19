@@ -5,13 +5,18 @@
  * @param {string} category - The category of the task to be added.
  */
 function openAddTaskOverlay(category) {
-    if (window.innerWidth > 1000) {
-        document.getElementById('add-task-form').setAttribute('onsubmit', `startCreateTaskFromBoard("${category}"); return false`);
-        document.getElementById('add-task-container').classList.remove('d-none');
-    } else {
-        var url = 'add_task.html?category=' + category;
-        window.location.href = url;
-    }
+  if (window.innerWidth > 1000) {
+    document
+      .getElementById("add-task-form")
+      .setAttribute(
+        "onsubmit",
+        `startCreateTaskFromBoard("${category}"); return false`
+      );
+    document.getElementById("add-task-container").classList.remove("d-none");
+  } else {
+    var url = "add_task.html?category=" + category;
+    window.location.href = url;
+  }
 }
 
 /**
@@ -21,11 +26,11 @@ function openAddTaskOverlay(category) {
  * @param {string} category - The category of the task to be created.
  */
 async function startCreateTaskFromBoard(category) {
-    document.getElementById('add-task-container').classList.add('d-none');
-    await createTask(category);
-    clearTask();
-    boardInit();
-    document.getElementById('add-task-form').removeAttribute('onsubmit');
+  document.getElementById("add-task-container").classList.add("d-none");
+  await createTask(category);
+  clearTask();
+  boardInit();
+  document.getElementById("add-task-form").removeAttribute("onsubmit");
 }
 
 /**
@@ -33,8 +38,8 @@ async function startCreateTaskFromBoard(category) {
  * and removing the 'onsubmit' attribute from the add task form.
  */
 function closeAddTaskOverlay() {
-    document.getElementById('add-task-container').classList.add('d-none');
-    document.getElementById('add-task-form').removeAttribute('onsubmit');
+  document.getElementById("add-task-container").classList.add("d-none");
+  document.getElementById("add-task-form").removeAttribute("onsubmit");
 }
 
 /**
@@ -43,11 +48,11 @@ function closeAddTaskOverlay() {
  * @param {number} ID - The ID of the todo item to be deleted.
  */
 function deleteTodo(event, ID) {
-    event.stopPropagation();
-    todo.splice(ID, 1);
-    upload();
-    closeDialog();
-    updateBoard();
+  event.stopPropagation();
+  todo.splice(ID, 1);
+  upload();
+  closeDialog();
+  updateBoard();
 }
 
 /**
@@ -56,14 +61,14 @@ function deleteTodo(event, ID) {
  * @param {number} selectedTodoID - The ID of the selected todo.
  */
 async function prioImg(priority, selectedTodoID) {
-    document.getElementById(`Image`).innerHTML = '';
-    if (priority === 'urgent') {
-        document.getElementById(`Image`).src = "../assets/img/icons/Heightprio.png";
-    } else if (priority === 'medium') {
-        document.getElementById(`Image`).src = "../assets/img/icons/Mediumprio.png";
-    } else if (priority === 'low') {
-        document.getElementById(`Image`).src = "../assets/img/icons/Lowprio.png";
-    }
+  document.getElementById(`Image`).innerHTML = "";
+  if (priority === "urgent") {
+    document.getElementById(`Image`).src = "../assets/img/icons/Heightprio.png";
+  } else if (priority === "medium") {
+    document.getElementById(`Image`).src = "../assets/img/icons/Mediumprio.png";
+  } else if (priority === "low") {
+    document.getElementById(`Image`).src = "../assets/img/icons/Lowprio.png";
+  }
 }
 
 /**
@@ -71,15 +76,19 @@ async function prioImg(priority, selectedTodoID) {
  * @param {object} selectedTodo - The selected todo object.
  */
 async function renderSubtaskDialog(selectedTodo) {
-    document.getElementById('subtaskContainer').innerHTML = '';
-    for (let i = 0; i < selectedTodo.subtasks.length; i++) {
-        const subtask = selectedTodo.subtasks[i].task;
-        if (selectedTodo.subtasks[i].done == false) {
-            document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, ${selectedTodo.id})" src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
-        } else {
-            document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, ${selectedTodo.id})" src="./assets/img/checkedButtondialog.png" alt=""> ${subtask} </div>`;
-        }
+  document.getElementById("subtaskContainer").innerHTML = "";
+  for (let i = 0; i < selectedTodo.task.subtasks.length; i++) {
+    const subtask = selectedTodo.task.subtasks[i].task;
+    if (selectedTodo.task.subtasks[i].done == false) {
+      document.getElementById(
+        "subtaskContainer"
+      ).innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, '${selectedTodo.id}')" src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
+    } else {
+      document.getElementById(
+        "subtaskContainer"
+      ).innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, '${selectedTodo.id}')" src="./assets/img/checkedButtondialog.png" alt=""> ${subtask} </div>`;
     }
+  }
 }
 
 /**
@@ -87,26 +96,35 @@ async function renderSubtaskDialog(selectedTodo) {
  * @param {number} i - The index of the subtask.
  * @param {number} ID - The ID of the todo.
  */
-function checkBoxSwitchImg(i, ID) {
-    let checkbox = document.getElementById(`checkBoxDialogImg${i}`);
-    let unchecked = `./assets/img/checkbox.png`;
-    let checked = `./assets/img/checkedButtondialog.png`;
-    if (todo[ID].subtasks[i].done == false) {
-        checkbox.src = checked;
-        todo[ID].subtasks[i].done = true;
-        upload();
-        updateBoard();
+async function checkBoxSwitchImg(i, ID) {
+  let checkbox = document.getElementById(`checkBoxDialogImg${i}`);
+  let unchecked = `./assets/img/checkbox.png`;
+  let checked = `./assets/img/checkedButtondialog.png`;
+
+  // Finde das entsprechende todo-Objekt anhand der ID
+  let taskToUpdate = todo.find((t) => t.id === ID);
+
+  // Überprüfe, ob das todo-Objekt gefunden wurde
+  if (taskToUpdate) {
+    // Greife auf die Subtask zu, die über den Index i bestimmt wird
+    if (taskToUpdate.task.subtasks[i].done == false) {
+      checkbox.src = checked;
+      taskToUpdate.task.subtasks[i].done = true;
     } else {
-        checkbox.src = unchecked;
-        todo[ID].subtasks[i].done = false;
-        upload();
-        updateBoard();
+      checkbox.src = unchecked;
+      taskToUpdate.task.subtasks[i].done = false;
     }
+
+    // Speichere die aktualisierten Daten
+    await setItem(`tasks/${ID}`, taskToUpdate.task);
+    updateBoard();
+  } else {
+    console.error(`Task with ID ${ID} not found`);
+  }
 }
 
-
 function closeFunctionEdit() {
-    closeDropdownMenu('add-task-contact-div-edit', 'assignet-arrow');
-    closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow')
-    closeSubtask();
+  closeDropdownMenu("add-task-contact-div-edit", "assignet-arrow");
+  closeDropdownMenu("add-task-category-list-div-edit", "category-arrow");
+  closeSubtask();
 }

@@ -23,45 +23,64 @@ async function boardInit() {
  * @returns {Promise<void>} A Promise that resolves when the todos are retrieved and logged.
  */
 async function getTodosForBoard() {
-    todo = await getItem('tasks');
+    try {
+        const tasksResponse = await getItem("tasks");
+        console.log("response", tasksResponse);
+        todo = [];
+    
+        if (tasksResponse) {
+          Object.keys(tasksResponse).forEach((task) => {
+            todo.push({
+              id: task,
+              task: tasksResponse[task],
+            });
+          });
+        }
+    
+        console.log("as array", todo);
+      } catch (e) {
+        console.error("Loading error:", e);
+      }
 }
 
 /**
  * Updates the board with the current list of todos.
  */
 function updateBoard() {
-    let todos = todo.filter(t => t['category'] == 'todos');
+    let todos = todo.filter(t => t.task['category'] == 'todos'); // Zugriff auf t.task['category']
     document.getElementById('task_content_open').innerHTML = '';
     for (let index = 0; index < todos.length; index++) {
-        clean = todos[index];
+        let clean = todos[index].task; // Zugriff auf das task-Objekt
+        let taskId = todo[index].id;
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
-        document.getElementById('task_content_open').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
+        document.getElementById('task_content_open').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal, taskId);
     }
-    let inprogress = todo.filter(t => t['category'] == 'inprogress');
-    document.getElementById('close_one').innerHTML = '';
 
+    let inprogress = todo.filter(t => t.task['category'] == 'inprogress'); // Zugriff auf t.task['category']
+    document.getElementById('close_one').innerHTML = '';
     for (let index = 0; index < inprogress.length; index++) {
-        clean = inprogress[index];
+        let clean = inprogress[index].task; // Zugriff auf das task-Objekt
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('close_one').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
-    let awaitList = todo.filter(t => t['category'] == 'await');
 
+    let awaitList = todo.filter(t => t.task['category'] == 'await'); // Zugriff auf t.task['category']
     document.getElementById('await_content').innerHTML = '';
     for (let index = 0; index < awaitList.length; index++) {
-        clean = awaitList[index];
+        let clean = awaitList[index].task; // Zugriff auf das task-Objekt
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('await_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
-    let doneList = todo.filter(t => t['category'] == 'done');
+
+    let doneList = todo.filter(t => t.task['category'] == 'done'); // Zugriff auf t.task['category']
     document.getElementById('done_content').innerHTML = '';
     for (let index = 0; index < doneList.length; index++) {
-        clean = doneList[index];
+        let clean = doneList[index].task; // Zugriff auf das task-Objekt
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('done_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
-
 }
+
 
 /**
  * Sets the current dragged element when starting the drag operation.
@@ -104,8 +123,8 @@ function getSubtaskDoneCounter(clean) {
  * @param {number} subTasksTotal - The total number of subtasks.
  * @returns {string} HTML markup representing the todo item.
  */
-function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
-    const todoId = `todo_${clean['id']}`;
+function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal, taskId) {
+    const todoId = `${taskId}`;
     let descriptionWords = clean['description'].split(' ');
     let truncatedDescription = descriptionWords.slice(0, 5).join(' ');
     if (descriptionWords.length > 5) {
@@ -119,7 +138,7 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
             <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
         `;
     }
-    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
+    return `<div draggable="true" class="todo" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
     <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
         <div class="updown_buttons">
@@ -153,7 +172,7 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
  * @returns {Promise<void>}
  */
 async function upload() {
-    await setItem('tasks', JSON.stringify(todo));
+    await postItem('tasks', todo);
 }
 
 /**
@@ -226,9 +245,9 @@ function removeHighlight(todoId) {
  * @param {number} selectedTodoID - The ID of the selected todo item.
  */
 async function renderDialog(selectedTodo, selectedTodoID) {
-    document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo, selectedTodoID);
-    await prioImg(selectedTodo["priority"], selectedTodoID);
-    await renderMemberList(selectedTodo);
+    document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo.task, selectedTodoID);
+    await prioImg(selectedTodo.task["priority"], selectedTodoID);
+    await renderMemberList(selectedTodo.task);
     await renderSubtaskDialog(selectedTodo);
 }
 
@@ -321,8 +340,8 @@ function getInitials(contact) {
  * @param {string} todoId - The ID of the todo item.
  */
 function openDialog(todoId) {
-    let id = todoId.split('_')[1];
-    let selectedTodo = todo.find(t => t.id == id);
+    // let id = todoId.split('_')[1];
+    let selectedTodo = todo.find(t => t.id == todoId);
     let selectedTodoID = selectedTodo.id;
     document.getElementById('dialog_bg').classList.remove('d-none');
     renderDialog(selectedTodo, selectedTodoID);
