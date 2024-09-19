@@ -11,8 +11,8 @@ let tasks = [];
  * @returns {Promise<void>} A Promise that resolves after initialization.
  */
 async function initAddTask() {
+    await loadContactList();
     await init();
-    loadContactList();
     renderSubtask();
     setDueDateInput();
 }
@@ -24,12 +24,22 @@ async function initAddTask() {
  */
 async function loadContactList() {
     try {
-        contactList = await getItem('contactList');
-        renderContactListForTask();
+      const contactListResponse = await getItem("contacts");
+      contactList = [];
+  
+      if (contactListResponse) {
+        Object.keys(contactListResponse).forEach((key) => {
+          contactList.push({
+            id: key,
+            contact: contactListResponse[key],
+          });
+        });
+      }
+      renderContactListForTask()
     } catch (e) {
-        console.error('Loading error:', e);
+      console.error("Loading error:", e);
     }
-}
+  }
 
 /**
  * Renders the contact list for tasks.
@@ -37,7 +47,7 @@ async function loadContactList() {
 function renderContactListForTask() {
     document.getElementById('add-task-contact').innerHTML = '';
     for (let i = 0; i < contactList.length; i++) {
-        let contact = contactList[i].name;
+        let contact = contactList[i].contact.name;
         const name = contact.split(" ");
         const firstName = name[0][0];
         const secondName = name[1] ? name[1][0] : '';
@@ -46,6 +56,7 @@ function renderContactListForTask() {
     }
 }
 
+
 /**
  * Filters and renders contacts for adding tasks based on the input value.
  */
@@ -53,7 +64,7 @@ async function filterContactsForAddTask() {
     document.getElementById('add-task-contact').innerHTML = '';
     let value = document.getElementById('add-task-assignet-to').value.toLowerCase();
     for (let i = 0; i < contactList.length; i++) {
-        let checkContact = contactList[i].name.toLowerCase();
+        let checkContact = contactList[i].contact.name.toLowerCase();
         filterContactsForAddTaskIF(i, value,contactList, checkContact);
     }
 }
@@ -101,7 +112,7 @@ function selectContact(i) {
     let get = document.getElementById(`add-task-assignet-checkbox${i}`);
     let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
     let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
-    let user = contactList[i].name;
+    let user = contactList[i].contact.name;
     selectContactIF(i, get, unchecked, checked, user);
     updateSelectedUsers(i);
 }
@@ -331,7 +342,7 @@ function clearTask() {
     let contactsDiv = document.getElementById('contacts-div');
     for (let i = 0; i < contactList.length; i++) {
         let get = document.getElementById(`add-task-assignet-checkbox${i}`);
-        let contact = contactList[i];
+        // let contact = contactList[i].contact;
         clearTaskIF(i, get, checked, unchecked);
     }
     contactsDiv.innerHTML = '';
@@ -353,26 +364,48 @@ async function startCreateTask() {
     pauseAndExecute();
 }
 
+
+async function loadTasks() {
+    try {
+      const tasksResponse = await getItem("tasks");
+      console.log("response", tasksResponse);
+      tasks = [];
+  
+      if (tasksResponse) {
+        Object.keys(tasksResponse).forEach((task) => {
+          tasks.push({
+            id: task,
+            task: tasksResponse[task],
+          });
+        });
+      }
+  
+      console.log("tasks as array", tasks);
+    } catch (e) {
+      console.error("Loading error:", e);
+    }
+  }
+  
 /**
  * Initiates the creation of a new task by setting the category based on URL parameters,
  * displaying the overlay, and asynchronously creating the task.
  */
 async function createTask(category) {
     typeLabel();
-    tasks = await getItem('tasks');
+    loadTasks();
     let task = {
-        "id": tasks.length,
-        "title": document.getElementById('add-task-title').value,
-        "description": document.getElementById('add-task-description').value,
-        "contacts": selectedUsers,
-        "dueDate": document.getElementById('add-task-date').value,
-        "priority": currentPrio,
-        "category": category,
-        "label": currentLabel,
-        "subtasks": subtasksArray,
-    };
-    tasks.push(task);
-    await setItem('tasks', JSON.stringify(tasks));
+        title: document.getElementById('add-task-title').value,
+        description: document.getElementById('add-task-description').value,
+        contacts: selectedUsers,
+        dueDate: document.getElementById('add-task-date').value,
+        priority: currentPrio, 
+        category: category,
+        label: currentLabel, 
+        subtasks: subtasksArray, 
+      };
+    
+      await postItem('tasks', task);
+      await loadTasks(); 
 }
 
 /**

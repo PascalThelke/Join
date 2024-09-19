@@ -55,7 +55,7 @@ function changePriorityIF(prio, urgent, medium, low) {
 
 function filterContactsForAddTaskIF(i, value,contactList, checkContact) {
     if (checkContact.includes(value)) {
-        let contact = contactList[i].name;
+        let contact = contactList[i].contact.name;
         const name = contact.split(" ");
         const firstName = name[0][0];
         const secondName = name[1] ? name[1][0] : '';
@@ -451,8 +451,8 @@ async function addExampleTasks() {
     TaskKeysArray.forEach(task => {
         tasks.push(
             {
-                id: TaskKeysArray[index],
-                task: taskResponse[TaskKeysArray[index]],
+                id: TaskKeysArray[task],
+                task: taskResponse[TaskKeysArray[task]],
             }
         )
     });
