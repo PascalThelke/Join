@@ -47,24 +47,21 @@ async function initContactList() {
  */
 async function loadContactList() {
   try {
-    // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
-    contactListResponse = await getItem("contactList");
+    const contactListResponse = await getItem("contacts");
     console.log("response", contactListResponse);
-    let contactKeysArray = Object.keys(contactListResponse);
-    console.log("key response", contactKeysArray);
+    contactList = [];
 
-    contactKeysArray.forEach((contact) => {
-        contactList.push(
-            {
-                id: contact,
-                contact: contactListResponse[contact],
-            }
-        )
-    });
+    if (contactListResponse) {
+      Object.keys(contactListResponse).forEach((key) => {
+        contactList.push({
+          id: key,
+          contact: contactListResponse[key],
+        });
+      });
+    }
 
     console.log("as array", contactList);
   } catch (e) {
-    // If an error occurs during parsing or retrieval, log the error to the console
     console.error("Loading error:", e);
   }
 }
@@ -83,7 +80,6 @@ function renderContactsToList() {
   for (let i = 0; i < alphabet.length; i++) {
     const letter = alphabet[i];
     const contactsStartingWithLetter = contactList.filter((contact) => {
-      // Überprüfen, ob 'contact.contact' existiert oder nicht
       if (contact.contact && contact.contact.name) {
         return contact.contact.name.charAt(0).toUpperCase() === letter;
       } else if (contact.name) {
@@ -112,7 +108,6 @@ function renderContactsToList() {
     }
   }
 }
-
 
 /**
  * Opens the edit contact dialog.
@@ -145,8 +140,11 @@ function openEditContact(alphabetIndex, contactIndex) {
  * @returns {Promise<void>} A Promise that resolves once the contact is updated.
  */
 async function updateContact() {
-  deleteContactWithoutConfirm();
-  addToContacts();
+  await deleteContactWithoutConfirm();
+  await initContactList();
+  await addToContacts();
+  await initContactList();
+
   showSuccessButtonEdit();
 }
 
@@ -158,38 +156,22 @@ async function updateContact() {
 async function addToContacts() {
   let saveContactButton = document.getElementById("contact_save_button");
   saveContactButton.disabled = true;
+
   let name = document.getElementById("contactlist_name_input");
   let mail = document.getElementById("contactlist_mail_input");
   let phone = document.getElementById("contactlist_phone_input");
-  let contact = [{
+
+  let contact = {
     name: name.value,
     mail: mail.value,
     phone: phone.value,
-  }];
-  // contactListResponse = await getItem("contactList");
-  // console.log("response", contactListResponse);
-  // let contactKeysArray = Object.keys(contactListResponse);
-  // console.log("key response", contactKeysArray);
+  };
 
-  // contactKeysArray.forEach((contact) => {
-  //     contactList.push(
-  //         {
-  //             id: contact,
-  //             contact: contactListResponse[contact],
-  //             name: name.value,
-  //             mail: mail.value,
-  //             phone: phone.value
-  //         }
-  //     )
-  // });
- 
-  console.log(contactList);
-  // contactList.push(contact);
-  await postItem("contactList", contact);
-  resetAddContactForm(name, mail, phone);
+  await postItem("contacts", contact);
+  await initContactList();
+
+  resetAddContactForm();
   closeAddContactDialog();
-  renderContactList();
-  findAlphabetIndex(contact);
   saveContactButton.disabled = false;
 }
 
@@ -219,23 +201,25 @@ async function deleteContact() {
   const contactMail = document
     .getElementById("contact_overview_mail")
     .innerText.trim();
+
   const indexToDelete = contactList.findIndex(
-    (contact) => contact.contact.name === contactName && contact.contact.mail === contactMail
+    (contact) =>
+      contact.contact.name === contactName &&
+      contact.contact.mail === contactMail
   );
   if (indexToDelete !== -1) {
     const confirmDelete = confirm(
-      "Are you sure you want to edit/delete this contact?"
+      "Are you sure you want to delete this contact?"
     );
     if (confirmDelete) {
+      const contactId = contactList[indexToDelete].id;
+      await deleteItem(`contacts/${contactId}`);
       contactList.splice(indexToDelete, 1);
-    } else {
-      return;
+      initContactList();
     }
-    await setItem("contactList", JSON.stringify(contactList));
-    renderContactList();
-    document.getElementById("contact_overview").style.transform =
-      "translateX(200%)";
   }
+  document.getElementById("contact_overview").style.transform =
+  "translateX(200%)";
   showSuccessButtonDelete();
 }
 
@@ -252,7 +236,9 @@ async function openEditContactLowRes() {
     .getElementById("contact_overview_mail")
     .innerText.trim();
   const contact = contactList.find(
-    (contact) => contact.contact.name === contactName && contact.contact.mail === contactMail
+    (contact) =>
+      contact.contact.name === contactName &&
+      contact.contact.mail === contactMail
   );
   if (!contact) {
     console.error("Contact not found.");

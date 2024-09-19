@@ -15,7 +15,6 @@ function noClose(event) {
  */
 function getInitials(contact) {
   let name = "";
-  console.log(contact)
   if (contact.contact && contact.contact.name) {
     name = contact.contact.name;
   } else if (contact.name) {
@@ -119,18 +118,20 @@ async function deleteContactWithoutConfirm() {
   const contactMail = document
     .getElementById("contact_overview_mail")
     .innerText.trim();
+
   const indexToDelete = contactList.findIndex(
     (contact) =>
-      contact.contact.name === contactName && contact.mail === contactMail
+      contact.contact.name === contactName &&
+      contact.contact.mail === contactMail
   );
-  if (indexToDelete !== -1) {
-    contactList.splice(indexToDelete, 1);
-    console.log("Contact deleted successfully.");
-  }
-  await setItem("contactList", JSON.stringify(contactList));
-  renderContactList();
+
+  const contactId = contactList[indexToDelete].id;
+  await deleteItem(`contacts/${contactId}`);
+  contactList.splice(indexToDelete, 1);
+  initContactList();
   document.getElementById("contact_overview").style.transform =
     "translateX(200%)";
+    showSuccessButtonEdit();
 }
 
 /**

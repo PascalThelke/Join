@@ -110,7 +110,6 @@ function renderContact(alphabetIndex, contactIndex) {
     } else if (contact.name) {
       return contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex];
     }
-    return false;
   })[contactIndex];
 
   // Initialen abrufen
