@@ -49,10 +49,9 @@ function closeAddTaskOverlay() {
  */
 function deleteTodo(event, ID) {
   event.stopPropagation();
-  todo.splice(ID, 1);
-  upload();
+  deleteItem(`tasks/${ID}`)
   closeDialog();
-  updateBoard();
+  boardInit();
 }
 
 /**

@@ -6,13 +6,23 @@
     .updown_buttons {
         display: flex;
     }
-
+    
     .drag-area {
-        height: 308px;
+        height: 332px;
         display: flex;
         flex-direction: row;
-        gap: 12px;
         width: calc(100vw - 317px);
+    }
+
+    .progress_await_container{
+        width: calc(100vw - 317px);
+        height: 332px;
+        display: flex;
+        flex-direction: column;
+    }
+    .todo{
+        margin-left: 16px;
+        margin-bottom: 16px;
     }
 }
 
@@ -46,7 +56,7 @@
     }
 
     .no_task_container {
-        margin-left: 4px;
+        margin-left: 16px;
     }
 
     .board_top {
@@ -56,11 +66,18 @@
     }
 
     .drag-area {
-        height: 328px;
+        height: 332px;
         display: flex;
         flex-direction: row;
-        gap: 12px;
         width: calc(96vw - 17px);
+    }
+
+    .progress_await_container{
+        height: 332px;
+        display: flex;
+        flex-direction: column;
+        width: calc(96vw - 17px);
+
     }
 
     .up_down_img_board {

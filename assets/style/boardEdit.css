@@ -255,9 +255,11 @@ body {
     gap: 16px;
 }
 
-[id^="myProgresstodo"] {
+[id^="myProgress"] {
     width: 100%;
+
 }
+
 
 .display_none_arrows {
     display: none;

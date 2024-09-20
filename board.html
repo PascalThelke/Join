@@ -60,10 +60,11 @@
                                     onclick="openAddTaskOverlay('todos')">+</button></div>
                         </div>
                         <div>
-                            <div id="noTodo" class="no_task_container d_nones">
-                                <span>no tasks</span>
-                            </div>
+
                             <div class="progress_await_container">
+                                <div id="noTodo" class="no_task_container d_nones">
+                                    <span>no tasks</span>
+                                </div>
                                 <div class="drag-area" id="task_content_open" ondrop="moveTo('todos')"
                                     ondragover="allowDrop(event)">
                                 </div>
@@ -76,11 +77,12 @@
                                     onclick="openAddTaskOverlay('inprogress')">+</button></div>
                         </div>
                         <div>
-                            <div id="noInprogresss" class="no_task_container d_nones">
-                                <span>no tasks</span>
-                            </div>
+
                             <div class="progress_await_done">
                                 <div class="progress_await_container">
+                                    <div id="noInprogresss" class="no_task_container d_nones">
+                                        <span>no tasks</span>
+                                    </div>
                                     <div class="drag-area" id="close_one" ondrop="moveTo('inprogress')"
                                         ondragover="allowDrop(event)"></div>
                                 </div>
@@ -93,11 +95,12 @@
                                     onclick="openAddTaskOverlay('await')">+</button></div>
                         </div>
                         <div>
-                            <div id="noFeedback" class="no_task_container d_nones">
-                                <span>no tasks</span>
-                            </div>
+
                             <div class="progress_await_done">
                                 <div class="progress_await_container">
+                                    <div id="noFeedback" class="no_task_container d_nones">
+                                        <span>no tasks</span>
+                                    </div>
                                     <div class="drag-area" id="await_content" ondrop="moveTo('await')"
                                         ondragover="allowDrop(event)"></div>
                                 </div>
@@ -110,11 +113,12 @@
                                     onclick="openAddTaskOverlay('done')">+</button></div>
                         </div>
                         <div>
-                            <div id="noDoneContent" class="no_task_container d_nones">
-                                <span>no tasks</span>
-                            </div>
+
                             <div class="progress_await_done">
                                 <div class="progress_await_container">
+                                    <div id="noDoneContent" class="no_task_container d_nones">
+                                        <span>no tasks</span>
+                                    </div>
                                     <div class="drag-area" id="done_content" ondrop="moveTo('done')"
                                         ondragover="allowDrop(event)">
                                     </div>
@@ -219,14 +223,18 @@
                                     <div style="height: 9px;"></div>
                                     <div id="add-task-category-list" class="dropdown-menu">
                                         <div id="task-label-technical" class="add-task-single"
-                                            onclick="selectLabel('Technical Task'); closeFunctionEdit()">Technical Task</div>
+                                            onclick="selectLabel('Technical Task'); closeFunctionEdit()">Technical Task
+                                        </div>
                                         <div id="task-label-user" class="add-task-single"
                                             onclick="selectLabel('User Story'); closeFunctionEdit()">User Story</div>
-                                        <div id="task-label-html" class="add-task-single" onclick="selectLabel('HTML'); closeFunctionEdit()">
+                                        <div id="task-label-html" class="add-task-single"
+                                            onclick="selectLabel('HTML'); closeFunctionEdit()">
                                             HTML</div>
-                                        <div id="task-label-css" class="add-task-single" onclick="selectLabel('CSS'); closeFunctionEdit()">
+                                        <div id="task-label-css" class="add-task-single"
+                                            onclick="selectLabel('CSS'); closeFunctionEdit()">
                                             CSS</div>
-                                        <div id="task-label-js" class="add-task-single" onclick="selectLabel('JS'); closeFunctionEdit()">
+                                        <div id="task-label-js" class="add-task-single"
+                                            onclick="selectLabel('JS'); closeFunctionEdit()">
                                             JS</div>
                                         <div id="task-label-tesig" class="add-task-single"
                                             onclick="selectLabel('Testing'); closeFunctionEdit()">Testing</div>
@@ -373,7 +381,8 @@
                                     <div style="height: 9px;"></div>
                                     <div id="add-task-category-list-edit" class="dropdown-menu">
                                         <div id="task-label-technical-edit" class="add-task-single"
-                                            onclick="selectLabelEdit('Technical Task'); closeFunction()">Technical Task</div>
+                                            onclick="selectLabelEdit('Technical Task'); closeFunction()">Technical Task
+                                        </div>
                                         <div id="task-label-user-edit" class="add-task-single"
                                             onclick="selectLabelEdit('User Story'); closeFunction()">User Story</div>
                                         <div id="task-label-html-edit" class="add-task-single"
@@ -404,10 +413,9 @@
                                 </div>
                                 <ul id="subtask-container-edit">
                                     <li class="subbtask" contenteditable="true">
-                                        <span>das ist ein subtask</span>
+                                        <span></span>
                                     </li>
                                     <li class="subbtask" contenteditable="true">
-                                        das hier ist auch ein subtask wer weis denn sowas moin moin
                                         <div>
                                             <svg class="subtask-icons">
                                                 <use href="assets/img/icons.svg#x-icon"></use>
