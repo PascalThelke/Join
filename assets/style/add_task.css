@@ -15,27 +15,29 @@ header {
     padding-left: 96px;
     width: calc(100vw - 232px);
     max-width: calc(1440px - 232px);
-    height: calc(100vh - 104px);
-    max-height: calc(1024px - 104px);
+    height: 100vh;
+    /* max-height: calc(1024px - 104px); */
     background: #F6F7F8;
     position: relative;
     /* overflow: auto; */
 }
 
 .main-div {
-    padding-top: 110px;
-    width: 1000px;
-    height: calc(100vh - 180px);
+    padding-top: 24px;
+    height: 91vh;
     overflow: auto;
 }
 
 .add-task-title {
-    margin-bottom: 38px;
+    margin-bottom: 24px;
     min-width: 396px;
 }
 
 .ad-task-form {
-    gap: 92px;
+    height: 87%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .form-input-titel {
@@ -89,7 +91,7 @@ header {
     height: 120px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     font-size: 20px;
     font-family: 'Inter', sans-serif;
     padding-left: 21px;
@@ -112,7 +114,7 @@ header {
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     font-size: 20px;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     padding-left: 21px;
     outline-width: 0px;
 }
@@ -125,7 +127,7 @@ header {
     height: 48px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     padding-left: 21px;
 }
 
@@ -147,7 +149,7 @@ header {
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     background-color: white;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -420,8 +422,7 @@ header {
 }
 
 .add-task-submit-container {
-    position: absolute;
-    bottom: 10px;
+    position: relative;
     width: 976px;
     max-width: 976px;
     min-width: 396px;
@@ -466,9 +467,9 @@ header {
 }
 
 @media (max-width: 1350px) {
-    .main-div {
+    /* .main-div {
         width: 900px;
-    }
+    } */
 
     .add-task-submit-container {
         width: 854px;
@@ -529,6 +530,7 @@ header {
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 88vh;
     }
 
     .add-task-submit-container {
@@ -615,14 +617,14 @@ header {
     }
 
     .main-div {
-        height: calc(100vh - 260px);
+        height: 80vh;
         width: 100vw;
-        padding-top: 60px;
+        padding-top: 24px;
     }
 
     .main-container {
-        height: calc(100vh - 184px);
-        max-height: 1024px;
+        height: 100vh;
+        max-height: 1096px;
         width: calc(100vw);
     }
 

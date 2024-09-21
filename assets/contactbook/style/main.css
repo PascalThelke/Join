@@ -10,7 +10,6 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     height: calc(100vh - 104px);
-    max-height: calc(1024px - 104px);
     width: 400px;
     padding: 0px 0px 0px 259px;
     background-color: white;
@@ -93,6 +92,7 @@ body {
     border-radius: 10px;
     background: #FFF;
     transition: 0.08s ease;
+    align-self: center;
 }
 
 .contact_list_container:hover {

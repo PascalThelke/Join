@@ -22,7 +22,6 @@ section {
   width: 100vh;
   justify-content: center;
   align-items: center;
-
 }
 
 .headIcon {
@@ -80,7 +79,6 @@ section {
   text-align: center;
   /* gap: 24px; */
   padding-bottom: 16px;
-
 }
 
 .headline {
@@ -218,13 +216,21 @@ section {
   animation: fade-out 600ms ease-in-out;
 }
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .hidden {
   visibility: hidden;
@@ -261,13 +267,12 @@ section {
   height: 51px;
   flex: none;
   flex-grow: 0;
-
 }
 
 .nameMsg img,
 .emailMsg img,
 .passwordMsg img,
-.confirmPasswordMsg img{
+.confirmPasswordMsg img {
   margin-left: -50px;
 }
 
@@ -291,9 +296,15 @@ section {
 .pwIcon {
   cursor: pointer;
 }
+.nameInvalid,
+.emailInvalid,
+.pwInvalid,
+.confirmPWInvalid,
+.emailInvalid {
+  align-self: flex-start;
+}
 
 @media (min-width: 319px) and (max-width: 481px) {
-
   .inputFieldBox {
     width: 326px;
   }
@@ -310,14 +321,24 @@ section {
     width: 305px;
   }
   .nameMsg,
-.emailMsg,
-.passwordMsg,
-.confirmPasswordMsg {
-  width: 221px;
-}
+  .emailMsg,
+  .passwordMsg,
+  .confirmPasswordMsg {
+    width: 221px;
+  }
+  .headIcon img {
+    display: none;
+  }
+  .nameInvalid,
+  .emailInvalid,
+  .pwInvalid,
+  .confirmPWInvalid,
+  .emailInvalid {
+    align-self: center;
+  }
 }
 
-@media(min-width: 482px) and (max-width:695px) {
+@media (min-width: 482px) and (max-width: 695px) {
   .nameMailPasswordInputField {
     width: 385px;
   }
@@ -330,12 +351,14 @@ section {
     left: 3px;
   }
   .nameMsg,
-.emailMsg,
-.passwordMsg,
-.confirmPasswordMsg {
-  width: 354px;
-}
-.emailInvalid{
-  width: 222px;
-}
+  .emailMsg,
+  .passwordMsg,
+  .confirmPasswordMsg {
+    width: 354px;
+  }
+
+
+  .headIcon img {
+    display: none;
+  }
 }

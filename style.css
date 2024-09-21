@@ -90,9 +90,6 @@ h1 {
     width: 64px;
 }
 
-.max-h {
-    max-height: 1024px;
-}
 
 .flex {
     display: flex;
@@ -172,7 +169,7 @@ h1 {
 }
 
 .mb28 {
-    margin-bottom: 28px;
+    margin-bottom: 8px;
 }
 
 /*---------------*/
@@ -183,7 +180,7 @@ h1 {
     /* width: 15vw; */
     height: 100vh;
     /* padding: 64px 0px; */
-    max-height: 1024px;
+    /* max-height: 1024px; */
     flex-direction: column;
     justify-content: space-around;
     align-items: center;

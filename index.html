@@ -2,90 +2,83 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <script src="assets/js/menu.js"></script>
-    <link rel="stylesheet" type="text/css" href="./assets/style/logIn.css" />
-    <script src="./assets/js/logIn.js"></script>
-    <script src="./assets/js/signUp.js"></script>
-    <link rel="stylesheet" href="./assets/style/fonts.css">
-    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
-    <script src="./assets/js/storage.js"></script>
-    <title>Kanban Project Management Tool</title>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <link rel="stylesheet" type="text/css" href="./assets/style/logIn.css" />
+  <script src="./assets/js/logIn.js"></script>
+  <script src="./assets/js/signUp.js"></script>
+  <link rel="stylesheet" href="./assets/style/fonts.css">
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
+  <script src="./assets/js/storage.js"></script>
+  <title>Kanban Project Management Tool</title>
+
 </head>
 
 <body onload="init()">
-    <section id="landing_page" class="landing_page modal">
-        <div class="landing_page_desktop">
-          <img src="./assets/img/join_logo-dark.png" alt="Logo Desktop" />
-        </div>
-        <div class="landing_page_mobile">
-          <img src="./assets/img/join_logo.png" alt="Logo Mobile" />
-        </div>
-      </section>
-      <header class="HeaderLogin">
-        <img class="headiconJoin" src="./assets/img/join_logo-dark.png" alt="" />
-        <div class="UserSignUp">
-          <p class="NotJoinUser">Not a Join user?</p>
-          <a class="notUserLink" href="./signUp.html">
-            <button class="btnSignUp">Sign up</button>
-          </a>
-        </div>
-      </header>
-      <!-- <div class="overlay"></div> -->
-      <section>
-        <div class="contentBox">
-          <div class="headlineBox">
-            <p>Log in</p>
-            <img src="./assets/img/blueUnderline.png">
+  <section id="landing_page" class="landing_page modal">
+    <div class="landing_page_desktop">
+      <img src="./assets/img/join_logo-dark.png" alt="Logo Desktop" />
+    </div>
+    <div class="landing_page_mobile">
+      <img src="./assets/img/join_logo-dark.png" alt="Logo Mobile" />
+    </div>
+  </section>
+  <header class="HeaderLogin">
+    <img class="headiconJoin" src="./assets/img/join_logo-dark.png" alt="" />
+    <div class="UserSignUp">
+      <p class="NotJoinUser">Not a Join user?</p>
+      <a class="notUserLink" href="./signUp.html">
+        <button class="btnSignUp">Sign up</button>
+      </a>
+    </div>
+  </header>
+  <section>
+    <div class="contentBox">
+      <div class="headlineBox">
+        <p>Log in</p>
+        <img src="./assets/img/blueUnderline.png">
+      </div>
+      <form class="login" onsubmit="logIn(event); return false;">
+        <div class="emailPasswordField">
+          <div class="mailPasswordInputField" id="moveEmail">
+            <input required type="email" placeholder="Email" id="email" oninput="checkEmailValidity()">
+            <img src="./assets/img/mail.png" alt="" />
           </div>
-  
-          <form class="login" onsubmit="logIn(event); return false;">
-            <div class="emailPasswordField">
-              <div class="mailPasswordInputField" id="moveEmail">
-                <input required type="email" placeholder="Email" id="email" oninput="checkEmailValidity()">
-                <img src="./assets/img/mail.png" alt="" />
-              </div>
-              <div class="emailInvalid hidden">Incorrect Email adress or password!</div>
-  
-              <div class="mailPasswordInputField">
-                <input required type="password" placeholder="Password" class="passwordInput" id="passwordInput" autocomplete="on"
-                onfocus="changePasswordInputIcon()">              
-                <span class="passwordIconDiv" onclick="togglePasswordInputType()">
-                    <img id="lock" class="passwordIcon" src="./assets/img/password_input.svg" alt="" />
-                    <!-- <img id="eyeOffImg" class="hidden" src="./assets/img/visibility_off.png" alt="" /> -->
-                </span>
-                <div class="passwordInvalidDiv hidden"> 
-                  Incorrect Email adress or password.
-                </div>
+          <div class="emailInvalid hidden">Incorrect Email adress or password!</div>
+
+          <div class="mailPasswordInputField">
+            <input required type="password" placeholder="Password" class="passwordInput" id="passwordInput"
+              autocomplete="on" onfocus="changePasswordInputIcon()">
+            <span class="passwordIconDiv" onclick="togglePasswordInputType()">
+              <img id="lock" class="passwordIcon" src="./assets/img/password_input.svg" alt="" />
+              <!-- <img id="eyeOffImg" class="hidden" src="./assets/img/visibility_off.png" alt="" /> -->
+            </span>
+            <div class="passwordInvalidDiv hidden">
+              Incorrect Email adress or password.
             </div>
-            
-              <div class="rememberMe" id="rememberMe">
-                <img
-                  id="unchecked"
-                  onclick="toggleLoginCheckbox()"
-                  src="./assets/img/checkbutton.png"
-                  alt="Checkbox"
-                />
-                Remember me
-              </div>
-            </div>
-            <div class="btnLogGuest">
-            
-              <button class="btnLogIn">Log in</button>
-              <!-- <button class="btnGuestLog">Guest Log in</button> -->
-              <button class="btnGuestLog" onclick="btnGuestLog()">Guest Log in</button>
-            </div>
-        </form>
+          </div>
+
+          <div class="rememberMe" id="rememberMe">
+            <img id="unchecked" onclick="toggleLoginCheckbox()" src="./assets/img/checkbutton.png" alt="Checkbox" />
+            Remember me
+          </div>
         </div>
-        <div class="footer-links">
-          <a href="./templates/privacy_policy-logOut.html">Privacy Policy</a>
-          <a href="./templates/legal_notice-logOut.html">Legal notice</a>
+        <div class="btnLogGuest">
+
+          <button class="btnLogIn">Log in</button>
+          <!-- <button class="btnGuestLog">Guest Log in</button> -->
+          <button class="btnGuestLog" onclick="btnGuestLog()">Guest Log in</button>
         </div>
-      </section>
+      </form>
+    </div>
+    <div class="footer-links">
+      <a href="./templates/privacy_policy-logOut.html">Privacy Policy</a>
+      <a href="./templates/legal_notice-logOut.html">Legal notice</a>
+    </div>
+  </section>
 </body>
 
 </html>

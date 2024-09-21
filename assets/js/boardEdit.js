@@ -58,8 +58,8 @@ function selectLabelEdit(label) {
  * @param {number} j - The index of the todo item.
  */
 function renderSubtaskEdit(currentTodo) {
-  if (!currentTodo.task.subtask) {
-    let subtasks = document.getElementById("subtask-container-edit");
+  let subtasks = document.getElementById("subtask-container-edit");
+  if (!currentTodo.task.subtasks) {
     subtasks.innerHTML = "";
     return;
   } else {
@@ -79,21 +79,30 @@ function renderSubtaskEdit(currentTodo) {
  * Adds a subtask to the todo item being edited.
  * @param {number} i - The index of the todo item.
  */
-function addSubtaskEdit(i) {
+async function addSubtaskEdit(i) {
   let subtaskInput = document.getElementById("add-task-subtasks-edit");
   let subtaskInputArray = {
     task: subtaskInput.value,
     done: false,
   };
   if (subtaskInput.value.length >= 3) {
-    todo[i].subtasks.push(subtaskInputArray);
-    renderSubtaskEdit(i);
-    subtaskInput.value = "";
-    closeSubtask();
+    let task = todo.find(task => task.id === i);
+    if (task) {
+      task.task.subtasks.push(subtaskInputArray);
+      console.log(task.task.subtasks);
+      await setItem(`tasks/${i}`, task);  // Hier wird die `putItem`-Methode verwendet
+      
+      renderSubtaskEdit(task); // Render die aktualisierte Subtask-Liste
+      subtaskInput.value = ""; // Setze das Input-Feld zurück
+      closeSubtask(); // Schließe das Subtask-Feld
+    } else {
+      console.error("Task mit der ID " + i + " wurde nicht gefunden.");
+    }
   } else {
-    subtaskInput.reportValidity();
+    subtaskInput.reportValidity(); // Zeige eine Fehlermeldung an, wenn die Eingabe zu kurz ist
   }
 }
+
 
 /**
  * Opens the subtask edit dialog for the specified todo item.
@@ -307,12 +316,24 @@ function clearTaskEdit() {
  */
 async function loadContactListEdit(currentTodo) {
   try {
-    contactList = await getItem("contactList");
+    const contactListResponse = await getItem("contacts");
+    contactList = [];
+
+    if (contactListResponse) {
+      Object.keys(contactListResponse).forEach((key) => {
+        contactList.push({
+          id: key,
+          contact: contactListResponse[key],
+        });
+      });
+    }
+    renderContactListForTask(currentTodo);
     renderContactListForTaskEdit(currentTodo);
     updateSelectedUsersEdit();
   } catch (e) {
     console.error("Loading error:", e);
   }
+
 }
 
 /**
@@ -481,17 +502,19 @@ function selectContactEdit(i) {
 function updateSelectedUsersEdit(i) {
   let contactsDiv = document.getElementById("contacts-div-edit");
   contactsDiv.innerHTML = "";
-  selectedUsers.forEach((selectedUser, i) => {
-    let nameParts = selectedUser.split(" ");
-    let initials = nameParts.map((part) => part[0]).join("");
-    let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : "";
-
-    contactsDiv.innerHTML += /*html*/ `
-            <div class="name-div selected-initials">
-                <span class="initials letter-${secondName}">${initials}</span>
-            </div>
-        `;
-  });
+  if(selectedUsers){
+    selectedUsers.forEach((selectedUser, i) => {
+      let nameParts = selectedUser.split(" ");
+      let initials = nameParts.map((part) => part[0]).join("");
+      let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : "";
+  
+      contactsDiv.innerHTML += /*html*/ `
+              <div class="name-div selected-initials">
+                  <span class="initials letter-${secondName}">${initials}</span>
+              </div>
+          `;
+    });
+  }
 }
 
 /**

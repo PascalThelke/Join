@@ -1,4 +1,3 @@
-
 let users = [];
 let newID = 0;
 
@@ -6,38 +5,58 @@ let newID = 0;
  * Initialisiert das Sign-Up-Modul, indem die Benutzerdaten aus dem lokalen Speicher geladen werden.
  */
 async function initSignUp() {
-  users = await getItem("users") || [];  
+  try {
+    const usersResponse = await getItem("users");
+    console.log("response", usersResponse);
+    users = [];
+
+    if (usersResponse) {
+      Object.keys(usersResponse).forEach((user) => {
+        users.push({
+          id: user,
+          user: usersResponse[user],
+        });
+      });
+    }
+
+    console.log("as array", users);
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
 }
 
 /**
  * Adds a new user to the list of users.
- * 
+ *
  * @returns {void}
  */
 async function addUser() {
-  let nameInput = document.getElementById('names').value;
-  let emailInput = document.getElementById('emails').value;
-  let passwordInput = document.getElementById('passwordField').value;
+  let nameInput = document.getElementById("names").value;
+  let emailInput = document.getElementById("emails").value;
+  let passwordInput = document.getElementById("passwordField").value;
 
-  let user = users.find(function(u) {                 
-        return u.email === emailInput && u.password === passwordInput && u.name === nameInput;
+  let user = users.find(function (u) {
+    return u.user.email === emailInput;
   });
   if (user) {
-    userExist()
-  }
-  else{
-    users.push({ name: nameInput, email: emailInput, password: passwordInput });
-    await setItem('users', JSON.stringify(users));
+    userExist();
+  } else {
+    let newUser = {
+      name: nameInput,
+      email: emailInput,
+      password: passwordInput,
+    };
+    await postItem("users", newUser);
     newID += newID;
     console.log(newID);
     displaySignUpSuccessMessage();
-    window.location.href = "./logIn.html";
+    window.location.href = "/join/index";
   }
-  }
-  
+}
+
 /**
  * Checks the validity of the name input field and displays an error message if invalid.
- * 
+ *
  * @returns {void}
  */
 function checkName() {
@@ -49,7 +68,6 @@ function checkName() {
   invalidDiv.classList.toggle("hidden", isValid);
   input.classList.toggle("alert", !isValid);
 }
-
 
 /**
  * Toggles the visibility icon for a password input field based on user interaction.
@@ -68,23 +86,18 @@ function togglePasswordIcon() {
       passwordInput.type = "password";
       icon.src = "./assets/img/password_input.svg";
     } else {
-      if (
-         passwordInput.type === "text" )
+      if (passwordInput.type === "text") {
         //  &&
         //  !icon.src.includes("visibility.svg")
-       {
         icon.src = "./assets/img/visibility.png";
-      } else if (
-        passwordInput.type === "password")
+      } else if (passwordInput.type === "password") {
         //  &&
         // !icon.src.includes("visibility_off.png")
-       {
         icon.src = "./assets/img/visibility_off.png";
       }
     }
   });
 }
-
 
 /**
  * Checks the validity of the password and confirmation password inputs.
@@ -106,7 +119,6 @@ function checkPasswordValidity() {
   }
 }
 
-
 /**
  * Handles the case when the password and confirmation password inputs do not match.
  * Displays an error message indicating password mismatch and adds alert styling to the inputs.
@@ -117,24 +129,24 @@ function handlePwMismatch() {
   let passwordInput = document.getElementById("passwordField");
   let confirmPasswordInput = document.getElementById("confirmPW");
 
-    confirmPasswordInvalid.textContent = "Ups! your password don’t match";
-    invalidPW.classList.remove("hidden");
-    confirmPasswordInvalid.classList.remove("hidden");
-    passwordInput.classList.add("alert");
-    confirmPasswordInput.classList.add("alert");
-  }
+  confirmPasswordInvalid.textContent = "Ups! your password don’t match";
+  invalidPW.classList.remove("hidden");
+  confirmPasswordInvalid.classList.remove("hidden");
+  passwordInput.classList.add("alert");
+  confirmPasswordInput.classList.add("alert");
+}
 
-  
 /**
  * Hides the password mismatch error messages.
  * Removes the "hidden" class from the password mismatch error message elements.
  */
 function hidePasswordMismatchMessage() {
-    let passwordMismatchMessage = document.querySelector(".pwInvalid");     // Verweise auf die entsprechenden HTML-Elemente für die Passwort-Missmatch-Meldungen
-  let confirmPasswordMismatchMessage = document.querySelector(".confirmPWInvalid");
+  let passwordMismatchMessage = document.querySelector(".pwInvalid"); // Verweise auf die entsprechenden HTML-Elemente für die Passwort-Missmatch-Meldungen
+  let confirmPasswordMismatchMessage =
+    document.querySelector(".confirmPWInvalid");
   let passwordInput = document.getElementById("passwordField");
   let confirmPasswordInput = document.getElementById("confirmPW");
-  passwordMismatchMessage.classList.add("hidden");             // Fügt den Meldungen die Klasse "hidden" hinzu, um sie auszublenden
+  passwordMismatchMessage.classList.add("hidden"); // Fügt den Meldungen die Klasse "hidden" hinzu, um sie auszublenden
   confirmPasswordMismatchMessage.classList.add("hidden");
   passwordInput.classList.remove("alert");
   confirmPasswordInput.classList.remove("alert");
@@ -152,9 +164,9 @@ function validPwLength() {
     passwordInvalidDiv.textContent = "";
     passwordInvalidDiv.classList.add("hidden");
     passwordInput.classList.remove("alert");
-
   } else if (passwordInput.value.length < 4) {
-    passwordInvalidDiv.textContent = "Password must be at least 4 characters long";
+    passwordInvalidDiv.textContent =
+      "Password must be at least 4 characters long";
     passwordInvalidDiv.classList.remove("hidden");
     passwordInput.classList.add("alert");
   } else {
@@ -163,7 +175,6 @@ function validPwLength() {
     passwordInput.classList.remove("alert");
   }
 }
-
 
 /**
  * Toggles the visibility icon for the password input field based on its value and type.
@@ -180,7 +191,6 @@ function togglePwType() {
     passwordInput.type = "password";
   }
 }
-
 
 /**
  * Toggles the visibility icon for the confirmation password input field based on its value and type.
@@ -218,8 +228,7 @@ function checkEmail() {
 function userExist() {
   let emailInvalidDiv = document.querySelector(".emailInvalid");
   let emailInput = document.getElementById("emails");
-  emailInvalidDiv.textContent =
-    "The provided email is already registered. Please choose another email address or log in with your existing account.";
+  emailInvalidDiv.textContent = "The provided email is already registered.";
   emailInvalidDiv.classList.remove("hidden");
   emailInput.classList.add("alert");
 }
@@ -229,13 +238,13 @@ function userExist() {
  */
 function displaySignUpSuccessMessage() {
   let screen = document.getElementById("signUpScreen");
-  screen.classList.remove('hidden'); 
-  setTimeout(function() { 
-    screen.classList.add('animationOut'); 
-    setTimeout(function() { 
-      screen.classList.add('hidden'); 
-    }, 6000); 
-  }, 3000); 
+  screen.classList.remove("hidden");
+  setTimeout(function () {
+    screen.classList.add("animationOut");
+    setTimeout(function () {
+      screen.classList.add("hidden");
+    }, 6000);
+  }, 3000);
 }
 
 /**
@@ -247,7 +256,7 @@ function toggleSignUpCheckbox() {
 
   if (uncheckedCheckbox) {
     uncheckedCheckbox.src = "./assets/img/accept.png";
-    uncheckedCheckbox.id = "checked"; 
+    uncheckedCheckbox.id = "checked";
   } else if (checkedCheckbox) {
     checkedCheckbox.src = "./assets/img/checkbutton.png";
     checkedCheckbox.id = "checkbox";
@@ -280,12 +289,16 @@ function isButtonEnabled() {
   const emailField = document.getElementById("emails");
   const passwordField = document.getElementById("passwordField");
   const confirmPasswordInput = document.getElementById("confirmPW");
-  const invalidDivs = document.querySelectorAll(".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid");
-  const hasNoErrors = Array.from(invalidDivs).every(div => div.classList.contains("hidden"));
+  const invalidDivs = document.querySelectorAll(
+    ".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid"
+  );
+  const hasNoErrors = Array.from(invalidDivs).every((div) =>
+    div.classList.contains("hidden")
+  );
   const hasNoWarning = !document.querySelector(".alert");
-  
+
   const isEnabled =
-    checkbox.src.includes("accept.png") && 
+    checkbox.src.includes("accept.png") &&
     nameField.value.trim() !== "" &&
     emailField.value.trim() !== "" &&
     passwordField.value.trim() !== "" &&

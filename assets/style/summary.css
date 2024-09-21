@@ -12,7 +12,7 @@
     width: calc(100vw - 232px);
     max-width: calc(1440px - 232px);
     height: calc(100vh - 104px);
-    max-height: calc(1024px - 104px);
+    /* max-height: calc(1024px - 104px); */
     background: #F6F7F8;
     overflow: auto;
     box-sizing: border-box;

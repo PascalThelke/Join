@@ -7,11 +7,11 @@ body input {
 }
 
 .main-container {
-  padding: 20px 20px 0px 20px;
+  padding: 20px;
   width: calc(100vw - 232px);
   max-width: calc(1440px - 232px);
   height: calc(100vh - 104px);
-  max-height: calc(1024px - 104px);
+  /* max-height: calc(1024px - 104px); */
   overflow: auto;
   background: #f6f7f8;
   box-sizing: border-box;
@@ -87,6 +87,13 @@ body input {
   line-height: 120%;
   border: none;
 }
+
+.board_leftside_wrapper {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+
 .input_button_container {
   display: flex;
   padding: 8px 16px;
@@ -94,8 +101,7 @@ body input {
   align-items: center;
   gap: 4px;
   border-radius: 10px;
-  padding-left: 420px;
-  width: 396px;
+  width: 227px;
   height: 48px;
 }
 .board_midlane_main_container {
@@ -135,7 +141,7 @@ body input {
   font-weight: bold;
   font-size: 18px;
   color: #42526e;
-  margin-left: 16px;
+  margin: 8px;
 }
 .ml36:hover {
   background-color: #29abe2;
@@ -232,7 +238,7 @@ body input {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  height: 80%;
+  height: 720px;
   width: 420px;
   padding: 42px;
   flex-direction: column;
@@ -401,4 +407,3 @@ body input {
 .d_nones {
   display: none;
 }
-

@@ -32,14 +32,17 @@
                 <div class="board_top">
                     <div class="board_h1_button_container">
                         <h1>Board</h1>
-                        <div class="input_button_container">
-                            <input id="filter_input" type="text" placeholder="Filter tasks"
-                                oninput="filterTodosByTitle()">
-                            <div class="ml-36">|</div>
+                        <div class="board_leftside_wrapper">
+                            <div class="input_button_container">
+                                <input id="filter_input" type="text" placeholder="Filter tasks"
+                                    oninput="filterTodosByTitle()">
+                                <div class="ml-36">|</div>
+                            </div>
+                            <button class="button_img ml36"><span class="add_task_button_text"
+                                    onclick="openAddTaskOverlay('todos')">Add task </span><b><img
+                                        src="./assets/img/boardbuttonplus.png" alt=""></b></button>
                         </div>
-                        <button class="button_img ml36"><span class="add_task_button_text"
-                                onclick="openAddTaskOverlay('todos')">Add task </span><b><img
-                                    src="./assets/img/boardbuttonplus.png" alt=""></b></button>
+                        
                     </div>
                 </div>
                 <div class="board_h1_button_container_handy">
@@ -294,7 +297,7 @@
         onclick="closeAddTaskOverlay(); closeEditTodo(); closeDialog(); boardInit()">
         <div id="add-task-div-edit" class="add-task-div-edit" onclick="doNotClose(event)">
             <div id="main-div-edit" class="main-div-edit overflow" onclick="closeFunction()">
-                <h1 class="add-task-title-edit">Add Task</h1>
+                <h1 class="add-task-title-edit">Edit Task</h1>
                 <form id="add-task-form-edit" action="" class="ad-task-form column-space-between"
                     onsubmit="createTaskEdit(); return false">
                     <div class="gap48-edit">

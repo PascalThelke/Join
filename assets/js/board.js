@@ -213,9 +213,9 @@ function generateTodo(
  * Uploads the current state of tasks to the storage.
  * @returns {Promise<void>}
  */
-async function upload() {
-  await postItem("tasks", todo);
-}
+// async function upload() {
+//   await postItem("tasks", todo);
+// }
 
 /**
  * Prevents the default behavior for a drop event.
@@ -360,6 +360,7 @@ async function returnDialog(selectedTodo, selectedTodoID) {
  * @returns {string} The HTML content for the dialog box.
  */
 async function renderMemberList(selectedTodo) {
+  document.getElementById("board_member_content").innerHTML = "";
   if (selectedTodo.contacts) {
     for (let i = 0; i < selectedTodo.contacts.length; i++) {
       const member = selectedTodo.contacts[i];
@@ -370,7 +371,6 @@ async function renderMemberList(selectedTodo) {
             `;
     }
   }
-  document.getElementById("board_member_content").innerHTML = "";
 }
 
 /**

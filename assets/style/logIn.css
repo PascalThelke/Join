@@ -1,20 +1,22 @@
 body {
-    font-family: "Inter";
-    font-style: normal;
-    margin: 0;
-    background-color: #f5f5f5;
-    height: 100vh;
-  }
-  
-  .HeaderLogin {
-    display: flex;
-    justify-content: space-between;
-    padding: 60px 122px 0 77px;
-    margin-left: 12px;
-    background-color: transparent;
-    box-shadow: none;
-  }
-  /*
+  font-family: "Inter";
+  font-style: normal;
+  margin: 0;
+  background-color: #f5f5f5;
+  height: 100vh;
+}
+
+.HeaderLogin {
+  /* display: flex; */
+  justify-content: space-between;
+  /* padding: 60px 122px 0 77px; */
+  /* margin-left: 12px; */
+  background-color: transparent;
+  box-shadow: none;
+  width: 100vw;
+  height: 164px;
+}
+/*
   .headiconJoin {
     position: absolute;
     left: 5.35%;
@@ -36,302 +38,301 @@ body {
     animation-direction: normal;
     animation-fill-mode: both;
   } */
-  
-  .UserSignUp {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 35px;
-    position: absolute;
-    width: 287px;
-    height: 51px;
-    right: 10%;
-    top: 67px;
-  }
-  
-  .NotJoinUser {
-    width: 161px;
-    height: 25px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-    color: #000000;
-  }
-  
-  .btnSignUp {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 16px;
-    gap: 10px;
-    background: #2a3647;
-    border-radius: 8px;
-    width: 91px;
-    height: 51px;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 120%;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .btnSignUp:hover {
-    background: #29abe2;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .notUserLink {
-    text-decoration: none;
-  }
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f5f5f5;
-  }
-  
-  .login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 35px;
-  }
-  .contentBox {
-    /* Auto layout */
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 35px 0px;
-    gap: 35px;
-  
-    width: 652px;
-    height: 513px;
-  
-    /* white */
-  
-    background: #ffffff;
-    /* shadoe backlog box */
-  
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 30px;
-  }
-  
-  .headlineBox {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px;
-    gap: 24px;
-    width: 315px;
-    height: 97px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-  }
-  
-  .headlineBox p {
-    width: 627px;
-    height: 73px;
-    font-weight: 700;
-    font-size: 61px;
-    line-height: 120%;
-    text-align: center;
-    color: #000000;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-  }
-  
-  .emailPasswordField {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* padding: 32px 0px; */
-    gap: 8px;
-    width: 396px;
-    /* height: 171px; */
-    flex: none;
-    flex-grow: 0;
-    justify-content: space-evenly;
-    height: 52%;
+.headiconJoin {
+  padding: 32px;
 }
-  
-  .mailPasswordInputField {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    
-    gap: 10px;
-    width: 422px;
-    height: 51px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 
-  }
-  
-  .mailPasswordInputField input {
-    width: 90%;
-    color: black;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    outline: none;
-    border: 1px solid #d1d1d1;
-    border-radius: 10px;
-    padding: 13px 21px;
-  }
+.UserSignUp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 16px;
+  gap: 35px;
+  width: 287px;
+  height: 51px;
+}
 
-  .mailPasswordInputField input:focus{
-    border-color: #29abe2;
-  }
-  
-  .mailPasswordInputField img {
-    width: 20px;
-    height: 18px; 
-    flex: none;
-    /* order: 1; */
-    flex-grow: 0;
-    margin-left: -50px;
-  }
-  
-  .rememberMe {
-    display: flex;
-    gap: 20px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-    color: #000000;
-    width: 335px;
-    height: 19px;
-    padding-top: 40px;
-  }
-  
-  .ForgotPassword {
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-    color: #29abe2;
-  }
+.NotJoinUser {
+  width: 161px;
+  height: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #000000;
+}
 
-  .btnLogGuest {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 32px;
-    gap: 35px;
-    width: 341px;
-    height: 51px;
-  }
-  .btnLogIn {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 0px;
-    gap: 10px;
-    width: 105px;
-    height: 48px;
-    background: #2a3647;
-    border-radius: 8px;
-    border: 0;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 120%;
-    color: #ffffff;
-  }
-  .btnLogIn:hover {
-    background: #29abe2;
-    cursor: pointer;
-  }
-  
-  .btnGuestLog {
-    box-sizing: border-box;
-    border: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 16px;
-    gap: 10px;  
-    width: 165px;
-    height: 48px;
-    border: 1px solid #2a3647;
-    border-radius: 8px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 120%;
-    color: #2a3647;
-    cursor: pointer;
-    background-color: white;
-  }
+.btnSignUp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  gap: 10px;
+  background: #2a3647;
+  border-radius: 8px;
+  width: 91px;
+  height: 51px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-  .btnGuestLog:hover {
-    cursor: pointer;
-    border: 2px solid #29abe2;
-    color: #29abe2;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    border-radius: 8px;
-  }
-  
-  .checkBox {
-    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
-    border: 1px solid #000000;
-    border-radius: 3px;
-  }
-  .d-none {
-    display: none;
-  }
-  .footer-links {
-    position: absolute;
-    bottom: 10px;    
-  }
-  .footer-links a{
-    text-decoration: none;
-    color: #a8a8a8;
-    padding: 8px;
-    gap: 8px;
-  }
-  .footer-links a:hover {
-    color: #29abe2;
-    transform: scale(1.15);
-  }
-  .hidden {
-    visibility: hidden;
-  }
+.btnSignUp:hover {
+  background: #29abe2;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-  .alert {
-    border-color: #ff8190 !important;
-  }
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    animation: reduceBackground 1.5s ease-out forwards;
-  }
-  .emailInvalidDiv,
+.notUserLink {
+  text-decoration: none;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+.contentBox {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 0px;
+  gap: 35px;
+
+  width: 652px;
+  height: 513px;
+
+  /* white */
+
+  background: #ffffff;
+  /* shadoe backlog box */
+
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+}
+
+.headlineBox {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  width: 315px;
+  height: 97px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.headlineBox p {
+  width: 627px;
+  height: 73px;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 120%;
+  text-align: center;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.emailPasswordField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 32px 0px; */
+  gap: 8px;
+  width: 396px;
+  /* height: 171px; */
+  flex: none;
+  flex-grow: 0;
+  justify-content: space-evenly;
+  height: 52%;
+}
+
+.mailPasswordInputField {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  gap: 10px;
+  width: 422px;
+  height: 51px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.mailPasswordInputField input {
+  width: 90%;
+  color: black;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  outline: none;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 13px 21px;
+}
+
+.mailPasswordInputField input:focus {
+  border-color: #29abe2;
+}
+
+.mailPasswordInputField img {
+  width: 20px;
+  height: 18px;
+  flex: none;
+  /* order: 1; */
+  flex-grow: 0;
+  margin-left: -50px;
+}
+
+.rememberMe {
+  display: flex;
+  gap: 20px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #000000;
+  width: 335px;
+  height: 19px;
+  padding-top: 40px;
+}
+
+.ForgotPassword {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #29abe2;
+}
+
+.btnLogGuest {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 32px;
+  gap: 35px;
+  width: 341px;
+  height: 51px;
+}
+.btnLogIn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0px;
+  gap: 10px;
+  width: 105px;
+  height: 48px;
+  background: #2a3647;
+  border-radius: 8px;
+  border: 0;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #ffffff;
+}
+.btnLogIn:hover {
+  background: #29abe2;
+  cursor: pointer;
+}
+
+.btnGuestLog {
+  box-sizing: border-box;
+  border: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  gap: 10px;
+  width: 165px;
+  height: 48px;
+  border: 1px solid #2a3647;
+  border-radius: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+  color: #2a3647;
+  cursor: pointer;
+  background-color: white;
+}
+
+.btnGuestLog:hover {
+  cursor: pointer;
+  border: 2px solid #29abe2;
+  color: #29abe2;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 8px;
+}
+
+.checkBox {
+  background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
+  border: 1px solid #000000;
+  border-radius: 3px;
+}
+.d-none {
+  display: none;
+}
+.footer-links {
+  position: absolute;
+  bottom: 10px;
+}
+.footer-links a {
+  text-decoration: none;
+  color: #a8a8a8;
+  padding: 8px;
+  gap: 8px;
+}
+.footer-links a:hover {
+  color: #29abe2;
+  transform: scale(1.15);
+}
+.hidden {
+  visibility: hidden;
+}
+
+.alert {
+  border-color: #ff8190 !important;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  animation: reduceBackground 1.5s ease-out forwards;
+}
+.emailInvalidDiv,
 .passwordInvalidDiv {
   position: absolute;
   color: #ff8190;
@@ -438,87 +439,89 @@ body {
     }
   } */
 
-  @media(max-width: 600px){
-    
-    .HeaderLogin {
-      justify-content: center;
+@media (max-width: 600px) {
+  .headiconJoin {
+    display: none;
+  }
+  .HeaderLogin{
+    justify-content: flex-end;
+  }
+}
+@media (max-width: 700px) {
+  .UserSignUp {
+    top: unset;
+    bottom: 70px;
+    justify-content: center;
+    align-items: center;
+    left: 10%;
+    width: auto;
+    gap: 10px;
+  }
+  .contentBox {
+    width: 520px;
+  }
+  .headlineBox p {
+    width: auto;
+  }
+  .NotJoinUser {
+    font-size: 20px;
+  }
+  .landing_page_mobile {
+    display: flex;
+    background-color: var(--main_color);
+  }
+  .landing_page_desktop {
+    display: none;
+  }
+
+  @keyframes moveDiagonal {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(-40vw, -45vh) scale(0.65);
     }
   }
-  @media(max-width: 700px){
-    .UserSignUp {
-      top: unset;
-      bottom: 70px; 
-      justify-content: center; 
-      align-items: center;    
-      left:10%;
-      width: auto;
-      gap:10px;
+
+  @keyframes resizeImage {
+    0% {
+      width: 300px;
+      height: 320px;
     }
-    .contentBox {
-      width:520px;
-    }
-    .headlineBox p {
-      width: auto;
-    }
-    .NotJoinUser {
-      font-size: 20px;
-    }
-    .landing_page_mobile {
-      display: flex;
-      background-color: var(--main_color);
-    }
-    .landing_page_desktop {
-      display: none;
-    }
-  
-    @keyframes moveDiagonal {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        transform: translate(-40vw, -45vh) scale(0.65);
-      }
-    }
-  
-    @keyframes resizeImage {
-      0% {
-        width: 300px;
-        height: 320px;
-      }
-      100% {
-        width: 100px;
-        height: 120px;
-      }
-    }
-  
-    .landing_page_mobile img {
-      animation: moveDiagonal 2s forwards, resizeImage 2s forwards;
+    100% {
+      width: 100px;
+      height: 120px;
     }
   }
-  @media(max-width: 600px){
-    .contentBox {
-      width: 275px;
-    }
-    .btnLogGuest {
-      flex-direction: column;
-      align-items: center;
-      gap: 9px;
-      width: 180px;
-      height: 51px;
-      /* padding: 4px 0px; */
-    }
-    /* .btnLogIn {
+
+  .landing_page_mobile img {
+    animation: moveDiagonal 2s forwards, resizeImage 2s forwards;
+  }
+}
+@media (max-width: 600px) {
+  .contentBox {
+    width: 275px;
+  }
+  .btnLogGuest {
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 180px;
+    height: 51px;
+    /* padding: 4px 0px; */
+  }
+  /* .btnLogIn {
       width: 180px;
       height: 51px;
       gap: 9px;
     } */
-    .emailPasswordField {
-      width:auto;
-    }
-    .rememberMe {
-      width: 220px
-    }
-    .mailPasswordInputField {
-      width: 218px;
-    }
+  .emailPasswordField {
+    width: auto;
   }
+  .rememberMe {
+    width: 220px;
+  }
+  .mailPasswordInputField {
+    width: 218px;
+  }
+}
