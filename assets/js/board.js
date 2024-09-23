@@ -410,19 +410,30 @@ function closeDialog() {
  * Updates the board with filtered todos based on the input value.
  */
 function filterTodosByTitle() {
-  let searchText = document
-    .getElementById("filter_input")
-    .value.trim()
-    .toLowerCase();
+  let searchText = document.getElementById("filter_input")
+    ? document.getElementById("filter_input").value.trim().toLowerCase()
+    : "";
+  if (searchText === "") {
+    searchText = document.getElementById("filter_input_mobile")
+      ? document
+          .getElementById("filter_input_mobile")
+          .value.trim()
+          .toLowerCase()
+      : "";
+  }
+  if (searchText === "") {
+    boardInit();
+    return;
+  }
   let filteredTodos = todo.filter((t) =>
-    t["title"].toLowerCase().startsWith(searchText)
+    t.task["title"].toLowerCase().startsWith(searchText)
   );
   document.getElementById("task_content_open").innerHTML = "";
   document.getElementById("close_one").innerHTML = "";
   document.getElementById("await_content").innerHTML = "";
   document.getElementById("done_content").innerHTML = "";
   for (let index = 0; index < filteredTodos.length; index++) {
-    let clean = filteredTodos[index];
+    let clean = filteredTodos[index].task;
     if (clean.category === "todos") {
       let { progressWidth, subTasksDone, subTasksTotal } =
         getSubtaskDoneCounter(clean);

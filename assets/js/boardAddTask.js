@@ -47,11 +47,11 @@ function closeAddTaskOverlay() {
  * @param {Event} event - The event object.
  * @param {number} ID - The ID of the todo item to be deleted.
  */
-function deleteTodo(event, ID) {
+async function deleteTodo(event, ID) {
   event.stopPropagation();
   deleteItem(`tasks/${ID}`)
+  await boardInit();
   closeDialog();
-  boardInit();
 }
 
 /**
