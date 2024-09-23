@@ -63,6 +63,7 @@ function renderSubtaskEdit(currentTodo) {
     subtasks.innerHTML = "";
     return;
   } else {
+    subtasks.innerHTML = "";
     for (let i = 0; i < currentTodo.task.subtasks.length; i++) {
       const subtask = currentTodo.task.subtasks[i].task;
       subtasks.innerHTML += /*html*/ `
@@ -86,23 +87,22 @@ async function addSubtaskEdit(i) {
     done: false,
   };
   if (subtaskInput.value.length >= 3) {
-    let task = todo.find(task => task.id === i);
-    if (task) {
+    let task = todo.find((task) => task.id === i);
+    if (task.task.subtasks) {
       task.task.subtasks.push(subtaskInputArray);
-      console.log(task.task.subtasks);
-      await setItem(`tasks/${i}`, task);  // Hier wird die `putItem`-Methode verwendet
-      
-      renderSubtaskEdit(task); // Render die aktualisierte Subtask-Liste
-      subtaskInput.value = ""; // Setze das Input-Feld zurück
-      closeSubtask(); // Schließe das Subtask-Feld
+      await setItem(`tasks/${i}/subtasks`, task.task.subtasks);
     } else {
-      console.error("Task mit der ID " + i + " wurde nicht gefunden.");
+      task.task.subtasks = [];
+      task.task.subtasks.push(subtaskInputArray);
+      await setItem(`tasks/${i}/subtasks`, task.task.subtasks);
     }
+    renderSubtaskEdit(task);
+    subtaskInput.value = "";
+    closeSubtask();
   } else {
-    subtaskInput.reportValidity(); // Zeige eine Fehlermeldung an, wenn die Eingabe zu kurz ist
+    subtaskInput.reportValidity();
   }
 }
-
 
 /**
  * Opens the subtask edit dialog for the specified todo item.
@@ -333,7 +333,6 @@ async function loadContactListEdit(currentTodo) {
   } catch (e) {
     console.error("Loading error:", e);
   }
-
 }
 
 /**
@@ -342,62 +341,36 @@ async function loadContactListEdit(currentTodo) {
 function renderContactListForTaskEdit(currentTodo) {
   selectedUsers = currentTodo.task.contacts;
   document.getElementById("add-task-contact-edit").innerHTML = "";
-  if(currentTodo.task.contacts){
-    for (let i = 0; i < selectedUsers.length; i++) {
-        let contact = selectedUsers[i];
-        const name = contact.split(" ");
-        const firstName = name[0][0];
-        const secondName = name[1] ? name[1][0] : "";
-        let initials = firstName + secondName;
-        let isChecked = selectedUsers.includes(contact);
-        let checkboxSVGId = `add-task-assignet-checkbox-edit${currentTodo.id}`;
-        let checkboxSVG = isChecked
-          ? `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
+  if (currentTodo.task.contacts) {
+    for (let i = 0; i < contactList.length; i++) {
+      let contact = contactList[i].contact.name;
+      const name = contact.split(" ");
+      const firstName = name[0][0];
+      const secondName = name[1] ? name[1][0] : "";
+      let initials = firstName + secondName;
+      let isChecked = selectedUsers.includes(contact);
+      let checkboxSVGId = `add-task-assignet-checkbox-edit${i}`;
+      let checkboxSVG = isChecked
+        ? `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
                       <use href="assets/img/icons.svg#checkbox-checked-icon"></use>
                   </svg>`
-          : `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
+        : `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
                       <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
                   </svg>`;
-    
-        let backgroundClass = isChecked ? "dark-background" : "";
-    
-        document.getElementById("add-task-contact-edit").innerHTML +=
-          renderContactListForTaskEditHTML(
-            contact,
-            i,
-            secondName,
-            initials,
-            currentTodo.id
-          );
-      }
-  }
-  
-}
 
-/**
- * Filters and renders contacts for adding tasks based on the input value.
- */
-async function filterContactsForAddTaskEdit() {
-  document.getElementById("add-task-contact-edit").innerHTML = "";
-  let value = document
-    .getElementById("add-task-assignet-to-edit")
-    .value.toLowerCase();
-  let taskToEdit = todo.filter((t) => t.id == "todos");
-  for (let i = 0; i < currentTodo.task.contacts.length; i++) {
-    let contact = currentTodo.task.contacts[i];
-    const name = contact.split(" ");
-    const firstName = name[0][0];
-    const secondName = name[1] ? name[1][0] : "";
-    let initials = firstName + secondName;
+      let backgroundClass = isChecked ? "dark-background" : "";
 
-    document.getElementById("add-task-contact-edit").innerHTML +=
-      renderContactListForTaskEditHTML(
-        contact,
-        i,
-        secondName,
-        initials,
-        currentTodo.id
-      );
+      document.getElementById("add-task-contact-edit").innerHTML +=
+        renderContactListForTaskEditHTML(
+          contact,
+          i,
+          secondName,
+          initials,
+          currentTodo.id,
+          backgroundClass,
+          checkboxSVG
+        );
+    }
   }
 }
 
@@ -415,22 +388,48 @@ function renderContactListForTaskEditHTML(
   i,
   secondName,
   initials,
-  taskId
+  taskId,
+  backgroundClass,
+  checkboxSVG
 ) {
   console.log(taskId);
   return /*html*/ `
-        <div id="task-contakt-edit${taskId}" class="add-task-single" onclick="selectContactEdit('${taskId}')">
+        <div id="task-contakt-edit${i}" class="add-task-single ${backgroundClass}" onclick="selectContactEdit('${taskId}','${i}')">
             <div class="name-div">
                 <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
                 <span>${contact}</span>
             </div>
             <div>
-                <svg id="add-task-assignet-checkbox-edit${taskId}" class="add-task-assignet-checkbox">
-                    <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
-                </svg>
+                ${checkboxSVG}
             </div>
         </div>
     `;
+}
+
+/**
+ * Filters and renders contacts for adding tasks based on the input value.
+ */
+async function filterContactsForAddTaskEdit() {
+  document.getElementById("add-task-contact-edit").innerHTML = "";
+  let value = document
+    .getElementById("add-task-assignet-to-edit")
+    .value.toLowerCase();
+  for (let i = 0; i < contactList.length; i++) {
+    let contact = contactList[i];
+    const name = contact.split(" ");
+    const firstName = name[0][0];
+    const secondName = name[1] ? name[1][0] : "";
+    let initials = firstName + secondName;
+
+    document.getElementById("add-task-contact-edit").innerHTML +=
+      renderContactListForTaskEditHTML(
+        contact,
+        i,
+        secondName,
+        initials,
+        currentTodo.id
+      );
+  }
 }
 
 /**
@@ -438,17 +437,15 @@ function renderContactListForTaskEditHTML(
  *
  * @param {number} i - The index of the contact.
  */
-function selectContactEdit(i) {
-  let currentTodo = todo.find((t) => t.id === i);
+function selectContactEdit(taskId, i) {
+  let currentTodo = todo.find((t) => t.id === taskId);
   currentTaskId = currentTodo.id;
   console.log(`Current Todo ID: ${currentTodo.id}`);
 
-  let get = document.getElementById(
-    `add-task-assignet-checkbox-edit${currentTodo.id}`
-  );
+  let get = document.getElementById(`add-task-assignet-checkbox-edit${i}`);
   if (!get) {
     console.error(
-      `Element with ID add-task-assignet-checkbox-edit${currentTodo.id} not found`
+      `Element with ID add-task-assignet-checkbox-edit${i} not found`
     );
     return;
   }
@@ -462,14 +459,12 @@ function selectContactEdit(i) {
       get.innerHTML =
         '<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>';
       let taskContactEditElement = document.getElementById(
-        `task-contakt-edit${currentTodo.id}`
+        `task-contakt-edit${i}`
       );
       if (taskContactEditElement) {
         taskContactEditElement.classList.remove("dark-background");
       } else {
-        console.error(
-          `Element with ID task-contakt-edit${currentTodo.id} not found`
-        );
+        console.error(`Element with ID task-contakt-edit${i} not found`);
       }
       selectedUsers = selectedUsers.filter(
         (selectedUser) => selectedUser !== user
@@ -502,12 +497,12 @@ function selectContactEdit(i) {
 function updateSelectedUsersEdit(i) {
   let contactsDiv = document.getElementById("contacts-div-edit");
   contactsDiv.innerHTML = "";
-  if(selectedUsers){
+  if (selectedUsers) {
     selectedUsers.forEach((selectedUser, i) => {
       let nameParts = selectedUser.split(" ");
       let initials = nameParts.map((part) => part[0]).join("");
       let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : "";
-  
+
       contactsDiv.innerHTML += /*html*/ `
               <div class="name-div selected-initials">
                   <span class="initials letter-${secondName}">${initials}</span>
@@ -529,7 +524,8 @@ function editTodo(event, i) {
   document
     .getElementById("add-task-form-edit")
     .setAttribute("onsubmit", `createTaskEdit('${i}'); return false`);
-  selectedUsers.push(currentTodo);
+  selectedUsers = [];
+  selectedUsers.push(currentTodo.task);
   document.getElementById("add-task-container-edit").classList.remove("d-none");
   document.getElementById(
     "add-task-title-edit"
