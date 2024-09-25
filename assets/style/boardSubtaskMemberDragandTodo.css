@@ -51,7 +51,7 @@
 }
 
 .card_label {
-    background-color: blue;
+    background-color: rgb(41,171,226);
     color: white;
     border-radius: 8px;
     height: 27px;
@@ -74,7 +74,7 @@
 #myBar {
     width: 12%;
     height: 30px;
-    background-color: #4589FF;
+    background-color: rgb(41,171,226);
     height: 8px;
     border-radius: 28px;
 }

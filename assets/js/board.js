@@ -421,10 +421,6 @@ function filterTodosByTitle() {
           .toLowerCase()
       : "";
   }
-  if (searchText === "") {
-    boardInit();
-    return;
-  }
   let filteredTodos = todo.filter((t) =>
     t.task["title"].toLowerCase().startsWith(searchText)
   );

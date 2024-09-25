@@ -217,7 +217,7 @@ body input {
   align-items: flex-start;
   gap: 10px;
   border-radius: 8px;
-  background: #0038ff;
+  background: rgb(41,171,226);
   justify-content: space-between;
   color: white;
 }

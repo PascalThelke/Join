@@ -67,7 +67,10 @@ function renderSubtaskEdit(currentTodo) {
     for (let i = 0; i < currentTodo.task.subtasks.length; i++) {
       const subtask = currentTodo.task.subtasks[i].task;
       subtasks.innerHTML += /*html*/ `
-            <li id="single-subtask-edit${i}" class="subbtask subbtask-hover" onmouseenter="subtaskEditButtonsOnEdit(${i})" onmouseleave="subtaskEditButtonsOutEdit(${i})" onclick="focusSubtaskEdit(${i}, ${currentTodo})">
+            <li id="single-subtask-edit${i}" class="subbtask subbtask-hover" 
+                onmouseenter="subtaskEditButtonsOnEdit(${i}, '${currentTodo.id}')"
+                onmouseleave="subtaskEditButtonsOutEdit(${i}, '${currentTodo.id}')"
+                onclick="focusSubtaskEdit(${i}, '${currentTodo.id}')">
                 <span id="single-subtask-txt-edit${i}" contenteditable="true" class="subbtask-span" value="${subtask}">${subtask}</span>
                 <div id="subtask-edit-buttons-edit${i}" class="subtask-icons-single-div" onclick="doNotClose(event)"></div>
             </li>
@@ -143,19 +146,20 @@ function closeSubtaskEdit(i) {
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-function subtaskEditButtonsOnEdit(i, j) {
+function subtaskEditButtonsOnEdit(i, todoId) {
   document.getElementById(
     `subtask-edit-buttons-edit${i}`
   ).innerHTML = /*html*/ `
-        <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i}, ${j})">
+        <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i}, '${todoId}')">
             <use href="assets/img/icons.svg#edit-pen"></use>
         </svg>
         <div class="mini-seperator"></div>
-        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, '${todoId}')">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
     `;
 }
+
 
 /**
  * Handles the mouseleave event for subtask edit buttons.
@@ -171,7 +175,9 @@ function subtaskEditButtonsOutEdit(i, j) {
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-function focusSubtaskEdit(i, j) {
+function focusSubtaskEdit(i, todoId) {
+  // let currentTodo = todo.find(todoItem => todoItem.id === todoId);
+  
   document
     .getElementById(`single-subtask-edit${i}`)
     .removeAttribute("onmouseenter");
@@ -182,16 +188,16 @@ function focusSubtaskEdit(i, j) {
     .getElementById("body")
     .setAttribute(
       "onclick",
-      `closeFunctionEdit(); startOnClickOutsideEdit(${i}, ${j})`
+      `closeFunctionEdit(); startOnClickOutsideEdit(${i}, '${todoId}')`
     );
   document.getElementById(
     `subtask-edit-buttons-edit${i}`
   ).innerHTML = /*html*/ `
-        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, '${todoId}')">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
         <div class="mini-seperator"></div>
-        <svg class="subtask-icons-single" onclick="editSubtaskEdit(${i}, ${j})">
+        <svg class="subtask-icons-single" onclick="editSubtaskEdit(${i}, '${todoId}')">
             <use href="assets/img/icons.svg#hook-icon"></use>
         </svg>
     `;
@@ -204,27 +210,21 @@ function focusSubtaskEdit(i, j) {
     .classList.remove("subbtask-hover");
 }
 
+
 /**
  * Listens for clicks outside the specified element and triggers actions accordingly.
  * @param {HTMLElement} element - The HTML element.
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-function onClickOutsideEdit(element, i, j) {
+function onClickOutsideEdit(i, j) {
   document.addEventListener("click", (e) => {
-    if (!element.contains(e.target)) {
-      document
-        .getElementById(`single-subtask-edit${i}`)
-        .setAttribute("onmouseenter", `subtaskEditButtonsOnEdit(${i}, ${j})`);
-      document
-        .getElementById(`single-subtask-edit${i}`)
-        .setAttribute("onmouseleave", `subtaskEditButtonsOutEdit(${i}, ${j})`);
-      document
-        .getElementById(`single-subtask-edit${i}`)
-        .classList.remove("subbtask-on-focus");
-      document
-        .getElementById(`single-subtask-edit${i}`)
-        .classList.add("subbtask-hover");
+    const element = document.getElementById(`single-subtask-edit${i}`);
+    if (element && !element.contains(e.target)) {
+      element.setAttribute("onmouseenter", `subtaskEditButtonsOnEdit(${i}, ${j})`);
+      element.setAttribute("onmouseleave", `subtaskEditButtonsOutEdit(${i}, ${j})`);
+      element.classList.remove("subbtask-on-focus");
+      element.classList.add("subbtask-hover");
       document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = "";
     }
   });
@@ -245,44 +245,49 @@ function startOnClickOutsideEdit(i, j) {
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-function editSubtaskEdit(i, j) {
-  const subtask = todo[j].subtasks[i];
-  subtask.splice(
-    i,
-    1,
-    document.getElementById(`single-subtask-txt-edit${i}`).innerHTML
-  );
+function editSubtaskEdit(i, todoId) {
+  let currentTodo = todo.find(todoItem => todoItem.id === todoId);
+  currentTodo.task.subtasks[i].task = document.getElementById(`single-subtask-txt-edit${i}`).innerHTML;
+
   document.getElementById(
     `subtask-edit-buttons-edit${i}`
   ).innerHTML = /*html*/ `
-        <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i})">
+        <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i}, '${todoId}')">
             <use href="assets/img/icons.svg#edit-pen"></use>
         </svg>
-        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, '${todoId}')">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
-`;
+  `;
   document
     .getElementById(`single-subtask-edit${i}`)
-    .setAttribute("onmouseenter", `subtaskEditButtonsOnEdit(${i})`);
+    .setAttribute("onmouseenter", `subtaskEditButtonsOnEdit(${i}, '${todoId}')`);
   document
     .getElementById(`single-subtask-edit${i}`)
-    .setAttribute("onmouseleave", `subtaskEditButtonsOutEdit(${i})`);
+    .setAttribute("onmouseleave", `subtaskEditButtonsOutEdit(${i}, '${todoId}')`);
   document
     .getElementById(`single-subtask-edit${i}`)
     .classList.remove("subbtask-on-focus");
 }
+
 
 /**
  * Deletes a subtask from the todo item in the edit mode.
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-function deleteSubtaskEdit(i, j) {
-  todo[j].subtasks.splice(i, 1);
-  upload();
-  renderSubtaskEdit(j);
+async function deleteSubtaskEdit(i, todoId) {
+  await deleteItem(`tasks/${todoId}/subtasks/${i}`);
+  await getTodosForBoard();
+  let currentTodo = todo.find(todoItem => todoItem.id === todoId);
+  // Neuindizierung der verbleibenden Subtasks
+  if (currentTodo && currentTodo.task.subtasks) {
+    currentTodo.task.subtasks = currentTodo.task.subtasks.filter((_, index) => index !== i);
+    await setItem(`tasks/${todoId}/subtasks`, currentTodo.task.subtasks);
+  }
+  renderSubtaskEdit(currentTodo); 
 }
+
 
 /**
  * Clears the task edit form by resetting checkboxes, contact list, priority, and subtasks array.
@@ -342,8 +347,8 @@ function renderContactListForTaskEdit(currentTodo) {
   selectedUsers = currentTodo.task.contacts;
   document.getElementById("add-task-contact-edit").innerHTML = "";
   if (currentTodo.task.contacts) {
-    for (let i = 0; i < contactList.length; i++) {
-      let contact = contactList[i].contact.name;
+    for (let i = 0; i < selectedUsers.length; i++) {
+      let contact = selectedUsers[i];
       const name = contact.split(" ");
       const firstName = name[0][0];
       const secondName = name[1] ? name[1][0] : "";

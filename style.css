@@ -545,29 +545,29 @@ Not supports in Firefox and IE */
 
 
 
-/* Poppige Farben */
+/* Bunte Farben, abgestimmt auf das Maintheme-Blau */
 .letter-a {
-    background-color: #FF1493 !important; /* Pink */
+    background-color: #FF6F61 !important; /* Leuchtendes Korallenrot */
 }
 
 .letter-b {
-    background-color: #FFD700 !important; /* Gold */
+    background-color: #FFD700 !important; /* Sonniges Gelb */
 }
 
 .letter-c {
-    background-color: #32CD32 !important; /* Limettengrün */
+    background-color: #32CD32 !important; /* Helles Limettengrün */
 }
 
 .letter-d {
-    background-color: #00BFFF !important; /* Himmelblau */
+    background-color: #00BFFF !important; /* Knalliges Himmelblau */
 }
 
 .letter-e {
-    background-color: #9370DB !important; /* Mittellila */
+    background-color: #BA55D3 !important; /* Lebhaftes Lila */
 }
 
 .letter-f {
-    background-color: #FF6347 !important; /* Tomatenrot */
+    background-color: #FF6347 !important; /* Helles Tomatenrot */
 }
 
 .letter-g {
@@ -575,27 +575,27 @@ Not supports in Firefox and IE */
 }
 
 .letter-h {
-    background-color: #FF69B4 !important; /* Pink */
+    background-color: #FF69B4 !important; /* Leuchtendes Pink */
 }
 
 .letter-i {
-    background-color: #FF8C00 !important; /* Dunkelorangen */
+    background-color: #FFA500 !important; /* Knalliges Orange */
 }
 
 .letter-j {
-    background-color: #00CED1 !important; /* Dunkeltürkis */
+    background-color: #40E0D0 !important; /* Türkis */
 }
 
 .letter-k {
-    background-color: #9400D3 !important; /* Dunkellila */
+    background-color: #9400D3 !important; /* Intensives Violett */
 }
 
 .letter-l {
-    background-color: #6A5ACD !important; /* Mittelblau */
+    background-color: #6A5ACD !important; /* Leuchtendes Blau */
 }
 
 .letter-m {
-    background-color: #CD5C5C !important; /* Indisches Rot */
+    background-color: #FF7F50 !important; /* Helles Koralle */
 }
 
 .letter-n {
@@ -603,7 +603,7 @@ Not supports in Firefox and IE */
 }
 
 .letter-o {
-    background-color: #00FF7F !important; /* Smaragdgrün */
+    background-color: #00FA9A !important; /* Knalliges Frühlingsgrün */
 }
 
 .letter-p {
@@ -611,23 +611,23 @@ Not supports in Firefox and IE */
 }
 
 .letter-q {
-    background-color: #8A2BE2 !important; /* Indigo */
+    background-color: #9370DB !important; /* Mittleres Lila */
 }
 
 .letter-r {
-    background-color: #B22222 !important; /* Ziegelrot */
+    background-color: #DC143C !important; /* Knalliges Karminrot */
 }
 
 .letter-s {
-    background-color: #20B2AA !important; /* Türkis */
+    background-color: #20B2AA !important; /* Helles Türkisgrün */
 }
 
 .letter-t {
-    background-color: #8B008B !important; /* Dunkelmagenta */
+    background-color: #9932CC !important; /* Helles Dunkelviolett */
 }
 
 .letter-u {
-    background-color: #FF69B4 !important; /* Pink */
+    background-color: #FF69B4 !important; /* Leuchtendes Pink */
 }
 
 .letter-v {
@@ -635,32 +635,32 @@ Not supports in Firefox and IE */
 }
 
 .letter-w {
-    background-color: #FF1493 !important; /* Pink */
+    background-color: #FF1493 !important; /* Kräftiges Pink */
 }
 
 .letter-x {
-    background-color: #B22222 !important; /* Ziegelrot */
+    background-color: #B22222 !important; /* Feuerrot */
 }
 
 .letter-y {
-    background-color: #FFD700 !important; /* Gold */
+    background-color: #FFD700 !important; /* Goldgelb */
 }
 
 .letter-z {
-    background-color: #FF8C00 !important; /* Dunkelorangen */
+    background-color: #FF8C00 !important; /* Dunkles Orange */
 }
 
 /* Umlaute */
 .letter-ä {
-    background-color: #FF1493 !important; /* Pink */
+    background-color: #FF1493 !important; /* Kräftiges Pink */
 }
 
 .letter-ö {
-    background-color: #00CED1 !important; /* Dunkeltürkis */
+    background-color: #00CED1 !important; /* Dunkles Türkis */
 }
 
 .letter-ü {
-    background-color: #FF69B4 !important; /* Pink */
+    background-color: #FF69B4 !important; /* Leuchtendes Pink */
 }
 
 /* Eszett */
