@@ -417,15 +417,16 @@ function filterTodosByTitle() {
           .toLowerCase()
       : "";
   }
-  let filteredTodos = todo.filter((t) =>
-    t.task["title"].toLowerCase().startsWith(searchText)
-  );
+  let filteredTodos = todo
+    .map((t, index) => ({ ...t, originalIndex: index }))
+    .filter((t) => t.task["title"].toLowerCase().startsWith(searchText));
   document.getElementById("task_content_open").innerHTML = "";
   document.getElementById("close_one").innerHTML = "";
   document.getElementById("await_content").innerHTML = "";
   document.getElementById("done_content").innerHTML = "";
-  for (let index = 0; index < filteredTodos.length; index++) {
-    let clean = filteredTodos[index].task;
+  for (let i = 0; i < filteredTodos.length; i++) {
+    let clean = filteredTodos[i].task;
+    let originalIndex = filteredTodos[i].originalIndex;
     if (clean.category === "todos") {
       let { progressWidth, subTasksDone, subTasksTotal } =
         getSubtaskDoneCounter(clean);
@@ -433,7 +434,8 @@ function filterTodosByTitle() {
         clean,
         progressWidth,
         subTasksDone,
-        subTasksTotal
+        subTasksTotal,
+        todo[originalIndex].id
       );
     } else if (clean.category === "inprogress") {
       let { progressWidth, subTasksDone, subTasksTotal } =
@@ -442,7 +444,8 @@ function filterTodosByTitle() {
         clean,
         progressWidth,
         subTasksDone,
-        subTasksTotal
+        subTasksTotal,
+        todo[originalIndex].id
       );
     } else if (clean.category === "await") {
       let { progressWidth, subTasksDone, subTasksTotal } =
@@ -451,7 +454,8 @@ function filterTodosByTitle() {
         clean,
         progressWidth,
         subTasksDone,
-        subTasksTotal
+        subTasksTotal,
+        todo[originalIndex].id
       );
     } else if (clean.category === "done") {
       let { progressWidth, subTasksDone, subTasksTotal } =
@@ -460,7 +464,8 @@ function filterTodosByTitle() {
         clean,
         progressWidth,
         subTasksDone,
-        subTasksTotal
+        subTasksTotal,
+        todo[originalIndex].id
       );
     }
   }
