@@ -49,8 +49,8 @@ function closeAddTaskOverlay() {
  */
 async function deleteTodo(event, ID) {
   event.stopPropagation();
-  deleteItem(`tasks/${ID}`)
-  await boardInit();
+  await deleteItem(`tasks/${ID}`);
+  boardInit();
   closeDialog();
 }
 
@@ -62,11 +62,11 @@ async function deleteTodo(event, ID) {
 async function prioImg(priority, selectedTodoID) {
   document.getElementById(`Image`).innerHTML = "";
   if (priority === "urgent") {
-    document.getElementById(`Image`).src = "../assets/img/icons/Heightprio.png";
+    document.getElementById(`Image`).src = "/join/assets/img/icons/highprio.png";
   } else if (priority === "medium") {
-    document.getElementById(`Image`).src = "../assets/img/icons/Mediumprio.png";
+    document.getElementById(`Image`).src = "/join/assets/img/icons/mediprio.png";
   } else if (priority === "low") {
-    document.getElementById(`Image`).src = "../assets/img/icons/Lowprio.png";
+    document.getElementById(`Image`).src = "/join/assets/img/icons/lowerprio.png";
   }
 }
 

@@ -23,7 +23,7 @@
 }
 
 .drag-area {
-    height: calc(100vh - 232px);
+    height: calc(94vh - 232px);
     /* background-color: rgba(0, 0, 0, 0.08); */
     width: 272px;
     display: flex;
@@ -239,9 +239,9 @@
 .todo {
     display: flex;
     height: 289px;
-    min-height: 254px;
+    min-height: 289px;
     width: 252px;
-    max-height: 289px;
+    max-height: 300px;
     padding: 16px;
     flex-direction: column;
     justify-content: space-between;

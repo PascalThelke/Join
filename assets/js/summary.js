@@ -14,9 +14,7 @@ let todo = [];
 async function getTodosForBoard() {
   try {
     const tasksResponse = await getItem("tasks");
-    console.log("response", tasksResponse);
     todo = [];
-
     if (tasksResponse) {
       Object.keys(tasksResponse).forEach((task) => {
         todo.push({
@@ -25,8 +23,6 @@ async function getTodosForBoard() {
         });
       });
     }
-
-    console.log("as array", todo);
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -39,11 +35,11 @@ async function getTodosForBoard() {
 async function getCurrentUser() {
   let userName = JSON.parse(localStorage.getItem("currentUserName"));
   let userEmail = JSON.parse(localStorage.getItem("currentUserEmail"));
-  let summaryUserName = document.getElementById('summary-userName');
+  let summaryUserName = document.getElementById("summary-userName");
   if (!userName) {
     userName = "Guest";
     userEmail = "guest@test.de";
-  }else{
+  } else {
     summaryUserName.textContent = userName;
   }
   let { profileinitials } = getInitialsforHeader(userName);
@@ -73,7 +69,6 @@ function updateGreeting() {
   let greetingTime = document.getElementById("greet");
   let currentDate = new Date();
   let currentHour = currentDate.getHours();
-
   if (currentHour >= 5 && currentHour < 12) {
     greetingTime.textContent = "Good Morning,";
   } else if (currentHour >= 12 && currentHour < 18) {

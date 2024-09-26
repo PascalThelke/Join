@@ -1,145 +1,146 @@
-@media(max-width:1430px) {
-    .board_midlane_main_container {
-        flex-direction: column;
-    }
+@media (max-width: 1430px) {
+  .board_midlane_main_container {
+    flex-direction: column;
+  }
 
-    .updown_buttons {
-        display: flex;
-    }
-    
-    .drag-area {
-        height: 332px;
-        display: flex;
-        flex-direction: row;
-        width: calc(100vw - 317px);
-    }
+  .updown_buttons {
+    display: flex;
+  }
 
-    .progress_await_container{
-        width: calc(100vw - 317px);
-        height: 332px;
-        display: flex;
-        flex-direction: column;
-    }
-    .todo{
-        margin-left: 16px;
-        margin-bottom: 16px;
-    }
+  .drag-area {
+    height: 332px;
+    display: flex;
+    flex-direction: row;
+    width: calc(100vw - 317px);
+  }
+
+  .main-container {
+    overflow: auto;
+  }
+  .progress_await_container {
+    width: calc(100vw - 317px);
+    height: 332px;
+    display: flex;
+    flex-direction: column;
+  }
+  .todo {
+    margin-left: 16px;
+    margin-bottom: 16px;
+  }
 }
 
-@media(max-width:1000px) {
-    .board_midlane_main_container {
-        margin-left: 0;
-    }
+@media (max-width: 1000px) {
+  .board_midlane_main_container {
+    margin-left: 0;
+  }
 
-    .button_img {
-        margin-bottom: 20px;
-    }
+  .button_img {
+    margin-bottom: 20px;
+  }
 
-    .board_h1_button_container_handy {
-        align-items: start;
-        margin-bottom: 20px;
-    }
+  .board_h1_button_container_handy {
+    align-items: start;
+    margin-bottom: 20px;
+  }
 
-    .input_button_container {
-        justify-content: start;
-    }
+  .input_button_container {
+    justify-content: start;
+  }
 
-    .midlane_flex_button {
-        margin-left: 4px;
-    }
+  .midlane_flex_button {
+    margin-left: 4px;
+  }
 
-    .main-container {
-        padding-top: 8vw;
-        padding-left: 4vw;
-        width: 100vw;
-        max-width: 100vw;
-        
-    }
+  .main-container {
+    padding-top: 8vw;
+    padding-left: 4vw;
+    width: 100vw;
+    max-width: 100vw;
+  }
 
-    .no_task_container {
-        margin-left: 16px;
-    }
+  .no_task_container {
+    margin-left: 16px;
+  }
 
-    .board_top {
-        width: unset;
-        height: unset;
-        margin-left: 0;
-    }
+  .board_top {
+    width: unset;
+    height: unset;
+    margin-left: 0;
+  }
 
-    .drag-area {
-        height: 332px;
-        display: flex;
-        flex-direction: row;
-        width: calc(96vw - 17px);
-    }
+  .drag-area {
+    height: 332px;
+    display: flex;
+    flex-direction: row;
+    width: calc(96vw - 17px);
+  }
 
-    .progress_await_container{
-        height: 332px;
-        display: flex;
-        flex-direction: column;
-        width: calc(96vw - 17px);
+  .progress_await_container {
+    height: 332px;
+    display: flex;
+    flex-direction: column;
+    width: calc(96vw - 17px);
+  }
 
-    }
+  .up_down_img_board {
+    display: flex;
+  }
 
-    .up_down_img_board {
-        display: flex;
-    }
-
-    .up_down_img_board {
-        display: block;
-    }
+  .up_down_img_board {
+    display: block;
+  }
 }
 
-@media(max-width:810px) {
-    .h1_input_media_flex {
-        display: flex;
-        flex-direction: column;
-    }
+@media (max-width: 810px) {
+  .h1_input_media_flex {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .board_h1_button_container_handy {
-        display: flex;
-    }
+  .board_h1_button_container_handy {
+    display: flex;
+  }
 
-    .board_h1_button_container {
-        display: none;
-    }
+  .board_h1_button_container {
+    display: none;
+  }
 
-    .add_task_button_text {
-        display: none;
-    }
+  .add_task_button_text {
+    display: none;
+  }
 }
 
-@media(max-width:450px) {
-    .input_button_container {
-        width: 85vw;
-    }
+@media (max-width: 450px) {
+  .input_button_container {
+    width: 85vw;
+  }
 }
 
-@media(max-width:1320px) {
-    .input_button_container {
-        padding-left: 0px;
-    }
+@media (max-width: 1320px) {
+  .input_button_container {
+    padding-left: 0px;
+  }
 }
 
-@media(max-width:538px) {
-    .users_story_dialog {
-        width: 320px;
-        height: 70%;
-        align-self: center;
-    }
+@media (max-width: 538px) {
+  .users_story_dialog {
+    width: 320px;
+    height: 70%;
+    align-self: center;
+  }
 
-    .user_story_delete_edit {
-        width: 250px;
-        margin-top: 16px;
-    }
+  .user_story_delete_edit {
+    width: 250px;
+    margin-top: 16px;
+  }
 
-    .user_story_headline {
-        font-size: 24px;
-    }
+  .user_story_headline {
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 1400px) {
-    /* .main-container {
+  /* .main-container {
         padding-left: 0;
         padding-right: 0;
         width: auto;
@@ -147,231 +148,231 @@
 }
 
 @media (max-width: 1350px) {
-    .add-task-submit-container {
-        width: 854px;
-        max-width: 976px;
-    }
+  .add-task-submit-container {
+    width: 854px;
+    max-width: 976px;
+  }
 
-    .add-task-input-div {
-        width: 396px;
-        min-width: 396px;
-    }
+  .add-task-input-div {
+    width: 396px;
+    min-width: 396px;
+  }
 
-    .add-task-prio-button {
-        height: 41px;
-        width: 121.33px;
-        font-size: 16px;
-    }
+  .add-task-prio-button {
+    height: 41px;
+    width: 121.33px;
+    font-size: 16px;
+  }
 
-    .gap48 {
-        gap: 33px;
-    }
+  .gap48 {
+    gap: 33px;
+  }
 
-    .form-input-titel {
-        font-size: 16px;
-    }
+  .form-input-titel {
+    font-size: 16px;
+  }
 
-    .conditions-text::before {
-        font-size: 16px;
-    }
+  .conditions-text::before {
+    font-size: 16px;
+  }
 
-    .asterisk::after {
-        font-size: 16px;
-    }
+  .asterisk::after {
+    font-size: 16px;
+  }
 
-    .add-task-input {
-        font-size: 16px;
-    }
+  .add-task-input {
+    font-size: 16px;
+  }
 
-    .add-task-textarea {
-        font-size: 16px;
-    }
+  .add-task-textarea {
+    font-size: 16px;
+  }
 
-    .add-task-select {
-        font-size: 16px;
-    }
+  .add-task-select {
+    font-size: 16px;
+  }
 
-    .input-icon {
-        top: 43px;
-    }
+  .input-icon {
+    top: 43px;
+  }
 
-    #subbtask-input-icon {
-        transform: translateY(170%);
-    }
+  #subbtask-input-icon {
+    transform: translateY(170%);
+  }
 }
 
 @media (max-width: 1200px) {
-    .main-div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  .main-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .add-task-submit-container {
-        width: 50vw;
-        max-width: 976px;
-    }
+  .add-task-submit-container {
+    width: 50vw;
+    max-width: 976px;
+  }
 
-    .add-task-title {
-        width: 50vw;
-    }
+  .add-task-title {
+    width: 50vw;
+  }
 
-    .gap48 {
-        flex-direction: column;
-    }
+  .gap48 {
+    flex-direction: column;
+  }
 
-    .seperator {
-        display: none;
-    }
+  .seperator {
+    display: none;
+  }
 
-    .add-task-input-div {
-        width: 50vw;
-    }
+  .add-task-input-div {
+    width: 50vw;
+  }
 
-    .add-task-prio-button {
-        height: 41px;
-        width: 121.33px;
-    }
+  .add-task-prio-button {
+    height: 41px;
+    width: 121.33px;
+  }
 
-    .gap48 {
-        gap: 0;
-    }
+  .gap48 {
+    gap: 0;
+  }
 
-    .add-task-buttons-div {
-        justify-content: flex-end;
-    }
+  .add-task-buttons-div {
+    justify-content: flex-end;
+  }
 
-    .form-input-titel {
-        font-size: 20px;
-    }
+  .form-input-titel {
+    font-size: 20px;
+  }
 
-    .conditions-text::before {
-        font-size: 20px;
-    }
+  .conditions-text::before {
+    font-size: 20px;
+  }
 
-    .asterisk::after {
-        font-size: 20px;
-    }
+  .asterisk::after {
+    font-size: 20px;
+  }
 
-    .add-task-input {
-        font-size: 20px;
-    }
+  .add-task-input {
+    font-size: 20px;
+  }
 
-    .add-task-textarea {
-        font-size: 20px;
-    }
+  .add-task-textarea {
+    font-size: 20px;
+  }
 
-    .add-task-select {
-        font-size: 20px;
-    }
+  .add-task-select {
+    font-size: 20px;
+  }
 
-    .add-task-prio-button {
-        font-size: 20px;
-        height: 56px;
-        width: 136px;
-    }
+  .add-task-prio-button {
+    font-size: 20px;
+    height: 56px;
+    width: 136px;
+  }
 
-    .input-icon {
-        top: 47px;
-    }
+  .input-icon {
+    top: 47px;
+  }
 
-    #subbtask-input-icon {
-        transform: translateY(190%);
-    }
+  #subbtask-input-icon {
+    transform: translateY(190%);
+  }
 }
 
 @media (max-width: 1000px) {
-    .add-task-submit-container {
-        align-items: center;
-    }
+  .add-task-submit-container {
+    align-items: center;
+  }
 
-    #clear-task-button {
-        display: none;
-    }
+  #clear-task-button {
+    display: none;
+  }
 
-    .main-container {
-        height: 80vh;
-        max-height: 1096px;
-        width: 100vw;
-    }
+  .main-container {
+    height: 80vh;
+    max-height: 1096px;
+    width: 100vw;
+  }
 
-    #subbtask-input-icon {
-        transform: translateY(190%);
-    }
+  #subbtask-input-icon {
+    transform: translateY(190%);
+  }
 }
 
 @media (max-width: 650px) {
-    .add-task-div {
-        padding: 10px;
-    }
+  .add-task-div {
+    padding: 10px;
+  }
 
-    .add-task-input-div {
-        width: 50vw;
-    }
+  .add-task-input-div {
+    width: 50vw;
+  }
 
-    .add-task-prio-button {
-        height: 41px;
-        width: 121.33px;
-        font-size: 16px;
-        padding: 4px;
-    }
+  .add-task-prio-button {
+    height: 41px;
+    width: 121.33px;
+    font-size: 16px;
+    padding: 4px;
+  }
 
-    .form-input-titel {
-        font-size: 16px;
-    }
+  .form-input-titel {
+    font-size: 16px;
+  }
 
-    .conditions-text::before {
-        font-size: 16px;
-    }
+  .conditions-text::before {
+    font-size: 16px;
+  }
 
-    .asterisk::after {
-        font-size: 16px;
-    }
+  .asterisk::after {
+    font-size: 16px;
+  }
 
-    .add-task-input {
-        font-size: 16px;
-    }
+  .add-task-input {
+    font-size: 16px;
+  }
 
-    .add-task-textarea {
-        font-size: 16px;
-    }
+  .add-task-textarea {
+    font-size: 16px;
+  }
 
-    .add-task-select {
-        font-size: 16px;
-    }
+  .add-task-select {
+    font-size: 16px;
+  }
 
-    .input-icon {
-        top: 42px;
-    }
+  .input-icon {
+    top: 42px;
+  }
 
-    #subbtask-input-icon {
-        transform: translateY(170%);
-    }
+  #subbtask-input-icon {
+    transform: translateY(170%);
+  }
 }
 
 @media (max-width: 500px) {
-    .add-task-submit-container {
-        width: 80vw;
-        min-width: 80vw;
-    }
+  .add-task-submit-container {
+    width: 80vw;
+    min-width: 80vw;
+  }
 
-    .add-task-title {
-        width: 80vw;
-        min-width: 80vw;
-    }
+  .add-task-title {
+    width: 80vw;
+    min-width: 80vw;
+  }
 
-    .add-task-input-div {
-        width: 80vw;
-        min-width: 80vw;
-    }
+  .add-task-input-div {
+    width: 80vw;
+    min-width: 80vw;
+  }
 
-    .main-container0 {
-        height: calc(100vh - 184px);
-        max-height: 1024px;
-        width: calc(100vw);
-    }
+  .main-container0 {
+    height: calc(100vh - 184px);
+    max-height: 1024px;
+    width: calc(100vw);
+  }
 
-    .main-container0 {
-        padding-top: 48px;
-    }
+  .main-container0 {
+    padding-top: 48px;
+  }
 }

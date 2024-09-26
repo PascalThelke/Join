@@ -426,10 +426,12 @@ function renderContactListForTaskEditHTML(
  */
 async function filterContactsForAddTaskEdit() {
   document.getElementById("add-task-contact-edit").innerHTML = "";
-  let value = document.getElementById("add-task-assignet-to-edit").value.toLowerCase();
+  let value = document
+    .getElementById("add-task-assignet-to-edit")
+    .value.toLowerCase();
   let filteredContacts = contactList
     .map((contact, index) => ({ ...contact, originalIndex: index }))
-    .filter(contact => contact.contact.name.toLowerCase().includes(value));
+    .filter((contact) => contact.contact.name.toLowerCase().includes(value));
   for (let i = 0; i < filteredContacts.length; i++) {
     let contact = filteredContacts[i].contact.name;
     const name = contact.split(" ");
@@ -459,8 +461,6 @@ async function filterContactsForAddTaskEdit() {
       );
   }
 }
-
-
 
 /**
  * Selects or deselects a contact based on its index and updates the list of selected users.
@@ -596,6 +596,7 @@ async function createTaskEdit(currentTodo) {
   toSaveTask.task.priority = currentPrio;
   toSaveTask.task.label = currentLabel;
   await setItem(`tasks/${currentTodo}`, toSaveTask.task);
+
   closeEditTodo();
   closeAddTaskOverlay();
   closeDialog();

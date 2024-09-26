@@ -7,9 +7,7 @@ let newID = 0;
 async function initSignUp() {
   try {
     const usersResponse = await getItem("users");
-    console.log("response", usersResponse);
     users = [];
-
     if (usersResponse) {
       Object.keys(usersResponse).forEach((user) => {
         users.push({
@@ -18,8 +16,6 @@ async function initSignUp() {
         });
       });
     }
-
-    console.log("as array", users);
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -48,7 +44,6 @@ async function addUser() {
     };
     await postItem("users", newUser);
     newID += newID;
-    console.log(newID);
     displaySignUpSuccessMessage();
     window.location.href = "/join/index";
   }

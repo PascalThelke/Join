@@ -19,7 +19,6 @@ async function init() {
 async function loadUsers() {
   try {
     const userData = await getItem("users");
-    console.log("response", userData);
     users = [];
     if (userData) {
       Object.keys(userData).forEach((user) => {
@@ -29,7 +28,6 @@ async function loadUsers() {
         });
       });
     }
-    console.log("as array", users);
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -77,7 +75,6 @@ function autoFillLoginForm() {
  */
 function logIn(event) {
   event.preventDefault();
-  console.log("event");
   let emailInput = document.getElementById("email");
   let passwordInput = document.getElementById("passwordInput");
   let user = users.find(function (u) {

@@ -13,7 +13,6 @@
 //         .then(res => res.json());
 // }
 
-
 /**
  * Retrieves the value associated with the specified key from the storage.
  * @param {string} key - The key of the item to retrieve.
@@ -25,45 +24,46 @@
 //     return fetch(url)
 //         .then(res => res.json())
 //         .then(res => {
-//             if (res.data) { 
+//             if (res.data) {
 //                 return res.data.value;
 //             }
 //             throw `Could not find data with key "${key}".`;
 //         });
 // }
 
-const STORAGE_URL = 'https://join-79db1-default-rtdb.europe-west1.firebasedatabase.app/';
+const STORAGE_URL =
+  "https://join-79db1-default-rtdb.europe-west1.firebasedatabase.app/";
 
-async function getItem(path=""){
-    let response = await fetch(STORAGE_URL + path + ".json");
-    return responseToJson = await response.json();
+async function getItem(path = "") {
+  let response = await fetch(STORAGE_URL + path + ".json");
+  return (responseToJson = await response.json());
 }
 
-async function postItem(path="", data={}){
-    let response = await fetch(STORAGE_URL + path + ".json",{
-        method: "POST",
-        header: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJson = await response.json();
+async function postItem(path = "", data = {}) {
+  let response = await fetch(STORAGE_URL + path + ".json", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }
 
-async function deleteItem(path="", data={}){
-    let response = await fetch(STORAGE_URL + path + ".json",{
-        method: "DELETE",
-    });
-    return responseToJson = await response.json();
+async function deleteItem(path = "", data = {}) {
+  let response = await fetch(STORAGE_URL + path + ".json", {
+    method: "DELETE",
+  });
+  return (responseToJson = await response.json());
 }
 
 async function setItem(path = "", data = {}) {
-    let response = await fetch(STORAGE_URL + path + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    return responseToJson = await response.json();
+  let response = await fetch(STORAGE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }

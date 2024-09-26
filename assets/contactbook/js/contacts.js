@@ -48,9 +48,7 @@ async function initContactList() {
 async function loadContactList() {
   try {
     const contactListResponse = await getItem("contacts");
-    console.log("response", contactListResponse);
     contactList = [];
-
     if (contactListResponse) {
       Object.keys(contactListResponse).forEach((key) => {
         contactList.push({
@@ -59,8 +57,6 @@ async function loadContactList() {
         });
       });
     }
-
-    console.log("as array", contactList);
   } catch (e) {
     console.error("Loading error:", e);
   }

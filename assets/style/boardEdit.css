@@ -130,6 +130,7 @@
     justify-content: center;
     gap: 4px;
     transition: box-shadow 80ms ease-in;
+    cursor: pointer;
 }
 
 .input-icon-edit {

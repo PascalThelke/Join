@@ -11,8 +11,6 @@ body input {
   width: calc(100vw - 232px);
   max-width: calc(1440px - 232px);
   height: calc(100vh - 104px);
-  /* max-height: calc(1024px - 104px); */
-  overflow: auto;
   background: #f6f7f8;
   box-sizing: border-box;
   display: flex;
@@ -57,7 +55,7 @@ body input {
   border-radius: 10px;
   border: 1px solid var(--icon, #a8a8a8);
   background: #fff;
-  background-image: url(/assets/img/board_Lupe.png);
+  background-image: url(../img/board_Lupe.png);
   background-position: center;
   background-repeat: no-repeat;
   background-position: right;
@@ -270,7 +268,7 @@ body input {
 .user_story_headline {
   color: var(--black, #000);
   font-family: Inter;
-  font-size: 41px;
+  font-size: 36px;
   font-style: normal;
   font-weight: 700;
   line-height: 120%;

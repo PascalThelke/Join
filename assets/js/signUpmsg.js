@@ -3,12 +3,12 @@
  * Hides the sign-up screen if no message parameter is found.
  */
 const urlParams = new URLSearchParams(window.location.search);
-const msg = urlParams.get('msg');
+const msg = urlParams.get("msg");
 let msgBox = document.getElementById("signUpScreen");
 
 if (msg) {
-    // msgBox.innerHTML = msg;
-    msgBox.classList.remove("hidden");
+  // msgBox.innerHTML = msg;
+  msgBox.classList.remove("hidden");
 } else {
-    msgBox.classList.add("hidden");
+  msgBox.classList.add("hidden");
 }

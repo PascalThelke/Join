@@ -25,9 +25,7 @@ async function boardInit() {
 async function getTodosForBoard() {
   try {
     const tasksResponse = await getItem("tasks");
-    console.log("response", tasksResponse);
     todo = [];
-
     if (tasksResponse) {
       Object.keys(tasksResponse).forEach((task) => {
         todo.push({
@@ -36,8 +34,6 @@ async function getTodosForBoard() {
         });
       });
     }
-
-    console.log("as array", todo);
   } catch (e) {
     console.error("Loading error:", e);
   }
